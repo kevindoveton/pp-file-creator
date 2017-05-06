@@ -6,6 +6,9 @@ class SlideList extends React.Component {
       super(props)
   }
   
+  componentDidMount() {
+  }
+  
   getSlide(slide) {
     return <Slide key={slide.id}/>
   }
@@ -16,7 +19,8 @@ class SlideList extends React.Component {
   }
   
   render() {
-    return this.createSlide();
+    // return this.createSlide();
+    return <div><Slide /></div>
 	}
 }
 

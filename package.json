@@ -36,6 +36,7 @@
     "fetch-base64": "^1.0.0",
     "file-loader": "^0.11.1",
     "flux": "^3.1.2",
+    "immutable": "^3.8.1",
     "konva": "^1.6.1",
     "material-ui": "^0.18.0",
     "node-sass": "^3.13.1",

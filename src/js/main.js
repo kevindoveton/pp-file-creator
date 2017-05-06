@@ -1,8 +1,14 @@
+// react
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App'
+
+// app
+import AppContainer from '/Containers/AppContainer'
+
+// css
 require('../styles/main.sass')
+
 ReactDOM.render(
-  <App />,
+  <AppContainer />,
   document.querySelector('#react-mount')
 );
