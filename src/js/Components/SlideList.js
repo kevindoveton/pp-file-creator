@@ -19,8 +19,8 @@ class SlideList extends React.Component {
   }
   
   render() {
-    // return this.createSlide();
-    return <div><Slide /></div>
+    return this.createSlide();
+    // return <div><Slide /></div>
 	}
 }
 

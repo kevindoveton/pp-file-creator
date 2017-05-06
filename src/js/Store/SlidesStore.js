@@ -10,7 +10,8 @@ import {ReduceStore} from 'flux/utils';
 import Counter from '/Utils/Counter';
 
 import SlideModel from '/Models/SlideModel';
-import SlideActions from '/Dispatcher/SlideActions';
+// import SlideActionTypes from '/Dispatcher/SlideActions';
+import SlideActionTypes from '/Dispatcher/SlideActionTypes';
 import SlideDispatcher from '/Dispatcher/SlideDispatcher';
 
 class SlideStore extends ReduceStore {
@@ -23,19 +24,13 @@ class SlideStore extends ReduceStore {
   }
 
   reduce(state, action) {
-      console.log(action)
       switch (action.type) {
-        // case SlideActions.ADD_TODO:
-        //   // Don't add todos with no text.
-        //   if (!action.text) {
-        //     return state;
-        //   }
-        //   const id = Counter.increment();
-        //   return state.set(id, new Todo({
-        //     id,
-        //     text: action.text,
-        //     complete: false,
-        //   }));
+        case SlideActionTypes.ADD_SLIDE:
+          const id = Counter.increment();
+          return state.set(id, new SlideModel({
+            id,
+            text: ''
+          }));
       // 
     //   case TodoActionTypes.DELETE_COMPLETED_TODOS:
     //     return state.filter(todo => !todo.complete);

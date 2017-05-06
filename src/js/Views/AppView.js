@@ -36,9 +36,11 @@ import Dispatcher from '/Dispatcher/SlideDispatcher';
 
 
 function AppView(props) {
+
   return (
     <div>
-      <SlideList />
+      <button onClick={props.onAddSlide}>Add</button>
+      <SlideList {...props}/>
     </div>
   );
 }

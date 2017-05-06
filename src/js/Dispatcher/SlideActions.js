@@ -1,16 +1,13 @@
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
 
-'use strict';
+import SlideActionTypes from '/Dispatcher/SlideActionTypes';
+import SlideDispatcher from '/Dispatcher/SlideDispatcher';
 
-const SlideActions = {
-  ADD_SLIDE: 'ADD_TODO'
+const Actions = {
+  addSlide() {
+    SlideDispatcher.dispatch({
+      type: SlideActionTypes.ADD_SLIDE
+    });
+  },
 };
 
-export default SlideActions;
+export default Actions;
