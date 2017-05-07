@@ -1,9 +1,8 @@
-// convertToRaw(this.state.editorState.getCurrentContent());
-
 import React from 'react';
 import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
+
+// styles
 require('../../styles/Partials/DraftJSEditor.sass')
-require('../../styles/Slide.sass')
 
 class SlideEditor extends React.Component {
   constructor(props) {
@@ -11,7 +10,12 @@ class SlideEditor extends React.Component {
     this.slide = this.props.slide;
     this.state = {editorState: EditorState.createEmpty()};
     this.onChange = (editorState) => {
-      this.setState({editorState})
+      console.log(this.props);
+      this.setState({editorState});
+      
+      // TODO: not sure if this is expensive
+      var rawState = convertToRaw(this.state.editorState.getCurrentContent());
+      this.props.EditSlideText(this.slide.id, rawState);
     };
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.focus = () => this.refs.editor.focus();

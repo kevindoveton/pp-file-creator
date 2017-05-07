@@ -39,7 +39,7 @@ function AppView(props) {
 
   return (
     <div>
-      <button onClick={props.onAddSlide}>Add</button>
+      <button onClick={props.AddSlide}>Add</button>
       <SlideList {...props}/>
     </div>
   );

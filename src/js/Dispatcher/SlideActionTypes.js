@@ -10,7 +10,8 @@
 'use strict';
 
 const SlideActions = {
-  ADD_SLIDE: 'ADD_SLIDE'
+  ADD_SLIDE: 'ADD_SLIDE',
+  EDIT_SLIDE_TEXT: 'EDIT_SLIDE_TEXT'
 };
 
 export default SlideActions;

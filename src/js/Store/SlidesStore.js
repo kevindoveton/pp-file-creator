@@ -38,8 +38,8 @@ class SlideStore extends ReduceStore {
     //   case TodoActionTypes.DELETE_TODO:
     //     return state.delete(action.id);
       // 
-    //   case TodoActionTypes.EDIT_TODO:
-    //     return state.setIn([action.id, 'text'], action.text);
+      case SlideActionTypes.EDIT_SLIDE_TEXT:
+        return state.setIn([action.id, 'state', ], action.state);
       // 
     //   case TodoActionTypes.TOGGLE_ALL_TODOS:
     //     const areAllComplete = state.every(todo => todo.complete);

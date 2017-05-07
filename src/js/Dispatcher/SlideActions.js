@@ -8,6 +8,14 @@ const Actions = {
       type: SlideActionTypes.ADD_SLIDE
     });
   },
+  
+  editSlideText(id, state) {
+    SlideDispatcher.dispatch({
+      type: SlideActionTypes.EDIT_SLIDE_TEXT,
+      id,
+      state
+    });
+  },
 };
 
 export default Actions;

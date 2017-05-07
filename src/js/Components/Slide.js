@@ -5,24 +5,26 @@ import SlidePreview from './SlidePreview'
 class Slide extends React.Component {
   constructor(props) {
       super(props)
+      
       this.slide = this.props.slide;
+      this.id = this.slide.id;
+
   }
   
   componentDidMount() {
-    
   }
   
   _newSlide() {
-    console.log(this.slide);
+
   }
   
   render() {
     return (
       <div>
-        <SlideEditor slide={this.slide}/>
+        <SlideEditor {...this.props} />
         <button onMouseDown={this._newSlide}>+</button>
         <button>-</button>
-        <SlidePreview />
+        <SlidePreview {...this.props} />
       </div>
     );
   }

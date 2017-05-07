@@ -7,10 +7,11 @@ class SlideList extends React.Component {
   }
   
   componentDidMount() {
+    this.props.AddSlide();
   }
   
   getSlide(slide) {
-    return <Slide key={slide.id} slide={slide}/>
+    return <Slide key={slide.id} slide={slide}{...this.props} />
   }
   
   createSlide() {
