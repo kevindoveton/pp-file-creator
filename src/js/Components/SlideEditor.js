@@ -10,12 +10,13 @@ class SlideEditor extends React.Component {
     this.slide = this.props.slide;
     this.state = {editorState: EditorState.createEmpty()};
     this.onChange = (editorState) => {
-      console.log(this.props);
       this.setState({editorState});
       
+      this.props.EditSlideText(this.slide.id, editorState.getCurrentContent().getPlainText())
+      
       // TODO: not sure if this is expensive
-      var rawState = convertToRaw(this.state.editorState.getCurrentContent());
-      this.props.EditSlideText(this.slide.id, rawState);
+      var rawState = convertToRaw(editorState.getCurrentContent());
+      this.props.EditSlideState(this.slide.id, rawState);
     };
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.focus = () => this.refs.editor.focus();

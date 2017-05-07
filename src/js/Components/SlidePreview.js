@@ -7,13 +7,30 @@ class SlidePreview extends React.Component {
     super(props);
     this.width = 267;
     this.height = 150;
+
   }
   
   componentDidMount() {
+
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    // TODO: Draw fancy text with formatting
+    // TODO: Scale according to template
+    
+    var rect = new Konva.Rect({
+      fill: '#000',
+      x: 0,
+      y: 0,
+      width: this.width,
+      height: this.height
+    });
+      
+    // TODO: get settings from pro5 template
     var text = new Konva.Text({
       x: 0,
       y: 0,
-      text: 'Excepteur nulla ullamco et exercitation do anim et excepteur in culpa irure non nostrud cillum ullamco dolor magna.',
+      text: this.props.slide.text,
       
       width: 267,
       padding: 0,
@@ -30,7 +47,10 @@ class SlidePreview extends React.Component {
     var offset = (this.height - text.getHeight())/2;
     text.setY(offset);
     
-    this.refs.layer.add(text)
+    this.refs.layer.clear();
+    this.refs.layer.add(rect);
+    this.refs.layer.add(text);
+    this.refs.layer.draw();
   }
   
   render() {

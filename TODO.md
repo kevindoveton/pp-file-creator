@@ -1,6 +1,7 @@
 ### TODOs
 | Filename | line # | TODO
 |:------|:------:|:------
-| webpack.config.js | 7 | remove this, it's better to define explicitly
-| src/js/Components/SlideEditor.js | 16 | not sure if this is expensive
-| src/js/Store/SlidesStore.js | 51 | => todo.set('complete', !todo.complete),
+| src/js/Components/SlideEditor.js | 17 | not sure if this is expensive
+| src/js/Components/SlidePreview.js | 18 | Draw fancy text with formatting
+| src/js/Components/SlidePreview.js | 19 | Scale according to template
+| src/js/Components/SlidePreview.js | 29 | get settings from pro5 template

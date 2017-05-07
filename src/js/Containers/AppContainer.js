@@ -18,7 +18,8 @@ function getState() {
   return {
     slides: SlideStore.getState(),
     AddSlide: SlideActions.addSlide,
-    EditSlideText: SlideActions.editSlideText
+    EditSlideText: SlideActions.editSlideText,
+    EditSlideState: SlideActions.editSlideState
   };
 }
 

@@ -43,6 +43,7 @@
     "material-ui": "^0.18.0",
     "node-sass": "^3.13.1",
     "normalize.css": "^4.2.0",
+    "pump": "^1.0.2",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.2.1",
     "react-bootstrap": "^0.30.0",

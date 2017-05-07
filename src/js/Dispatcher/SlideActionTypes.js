@@ -11,7 +11,8 @@
 
 const SlideActions = {
   ADD_SLIDE: 'ADD_SLIDE',
-  EDIT_SLIDE_TEXT: 'EDIT_SLIDE_TEXT'
+  EDIT_SLIDE_TEXT: 'EDIT_SLIDE_TEXT',
+  EDIT_SLIDE_STATE: 'EDIT_SLIDE_STATE'
 };
 
 export default SlideActions;

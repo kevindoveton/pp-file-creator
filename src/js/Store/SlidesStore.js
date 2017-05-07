@@ -10,7 +10,6 @@ import {ReduceStore} from 'flux/utils';
 import Counter from '/Utils/Counter';
 
 import SlideModel from '/Models/SlideModel';
-// import SlideActionTypes from '/Dispatcher/SlideActions';
 import SlideActionTypes from '/Dispatcher/SlideActionTypes';
 import SlideDispatcher from '/Dispatcher/SlideDispatcher';
 
@@ -31,25 +30,12 @@ class SlideStore extends ReduceStore {
             id,
             text: ''
           }));
-      // 
-    //   case TodoActionTypes.DELETE_COMPLETED_TODOS:
-    //     return state.filter(todo => !todo.complete);
-      // 
-    //   case TodoActionTypes.DELETE_TODO:
-    //     return state.delete(action.id);
-      // 
-      case SlideActionTypes.EDIT_SLIDE_TEXT:
-        return state.setIn([action.id, 'state', ], action.state);
-      // 
-    //   case TodoActionTypes.TOGGLE_ALL_TODOS:
-    //     const areAllComplete = state.every(todo => todo.complete);
-    //     return state.map(todo => todo.set('complete', !areAllComplete));
-      // 
-    //   case TodoActionTypes.TOGGLE_TODO:
-    //     return state.update(
-    //       action.id,
-    //       todo => todo.set('complete', !todo.complete),
-    //     );
+
+        case SlideActionTypes.EDIT_SLIDE_TEXT:
+          return state.setIn([action.id, 'text', ], action.text);
+
+        case SlideActionTypes.EDIT_SLIDE_STATE:
+          return state.setIn([action.id, 'state', ], action.state);
 
         default:
           return state;

@@ -2,9 +2,6 @@ const path = require('path'),
       webpack = require('webpack'),
       CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const smsBotBaseUrl = process.env.SMS_BOT_BASE_URL;
-
-//TODO: remove this, it's better to define explicitly
 const minify = process.env.NODE_ENV === 'production';
 const production = process.env.NODE_ENV === 'production';
 
@@ -16,16 +13,12 @@ const GLOBALS = {
 module.exports = {
   devtool: 'source-map',
   entry: [
-    //disabled these - seems to fix the node polling thing
-    // 'webpack-dev-server/client?http://0.0.0.0:3002',
-    // 'webpack/hot/dev-server',
     'whatwg-fetch',
     path.resolve(__dirname, './src/js/main.js'),
   ],
   cache: true,
   output: {
     path: path.join(__dirname, '/dist'),
-    // publicPath: "/dist/",
     filename: 'bundle.js'
   },
   plugins: [

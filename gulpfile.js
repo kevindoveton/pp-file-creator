@@ -1,12 +1,22 @@
-var gulp = require('gulp');
-var todo = require('gulp-todo');
+const pump = require('pump');
+const gulp = require('gulp');
+const todo = require('gulp-todo');
  
-// generate a todo.md from your javascript files 
-gulp.task('todo', function() {
-  gulp.src(['./**/*.js', '!node_modules/**/*'])
-    .pipe(todo())
-    .pipe(gulp.dest('./'));
-      // -> Will output a TODO.md with your todos 
+// generate a todo.md from your javascript files
+// -> Will output a TODO.md with your todos 
+gulp.task('todo', function(cb) {
+  pump([
+      gulp.src(['./**/*.js', '!node_modules/**/*']),
+      todo(),
+      gulp.dest('./')
+  ], function(e) {
+    if (typeof(e) != 'undefined') {
+      console.log(e);
+      process.exit(1);
+    } else {
+      cb();
+    }
+  })
 });
 
 gulp.task('default', ['todo']);
