@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# this is run before any commits
+gulp todo
