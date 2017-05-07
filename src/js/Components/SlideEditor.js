@@ -1,13 +1,18 @@
+// convertToRaw(this.state.editorState.getCurrentContent());
+
 import React from 'react';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
 require('../../styles/Partials/DraftJSEditor.sass')
 require('../../styles/Slide.sass')
 
 class SlideEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.slide = this.props.slide;
     this.state = {editorState: EditorState.createEmpty()};
-    this.onChange = (editorState) => this.setState({editorState});
+    this.onChange = (editorState) => {
+      this.setState({editorState})
+    };
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.focus = () => this.refs.editor.focus();
 
@@ -42,7 +47,7 @@ class SlideEditor extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className="DraftEditor-div">
         <Editor
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}

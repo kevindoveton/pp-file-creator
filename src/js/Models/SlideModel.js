@@ -4,7 +4,8 @@ import Immutable from 'immutable';
 
 const SlideModel = Immutable.Record({
   id: '',
-  text: ''
+  text: '',
+  state: {}
 });
 
 export default SlideModel

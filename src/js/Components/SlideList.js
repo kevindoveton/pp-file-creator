@@ -10,7 +10,7 @@ class SlideList extends React.Component {
   }
   
   getSlide(slide) {
-    return <Slide key={slide.id}/>
+    return <Slide key={slide.id} slide={slide}/>
   }
   
   createSlide() {
@@ -20,7 +20,6 @@ class SlideList extends React.Component {
   
   render() {
     return this.createSlide();
-    // return <div><Slide /></div>
 	}
 }
 

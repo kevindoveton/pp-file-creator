@@ -17,7 +17,6 @@ function getStores() {
 function getState() {
   return {
     slides: SlideStore.getState(),
-    
     onAddSlide: SlideActions.addSlide
   };
 }
