@@ -2,3 +2,4 @@
 
 # this is run before any commits
 gulp todo
+git stage TODO.md

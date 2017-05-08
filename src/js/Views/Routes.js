@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 
-// import { Router, Route, Link, IndexRoute, hashHistory, browserHistory, Switch } from 'react-router'
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +16,13 @@ class Routes extends Component {
       <h1>We are located at 555 Jackson St.</h1>
     );
   }
+  
+  // TODO: Make a prettier 404
+  get404() {
+    return (
+      <h1>Route Not Found</h1>
+    );
+  }
 
   render() {
     const NotFound = () => (<h1>404.. This page is not found!</h1>);
@@ -26,6 +32,7 @@ class Routes extends Component {
         <div>
           <Route exact path='/' component={AppContainer} />
           <Route path='/address' component={() => this.getAddress()} />
+          <Route path='*' component={() => this.get404()} />
         </div>
       </Router>
     );

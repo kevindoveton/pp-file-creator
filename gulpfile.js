@@ -6,7 +6,7 @@ const todo = require('gulp-todo');
 // -> Will output a TODO.md with your todos 
 gulp.task('todo', function(cb) {
   pump([
-      gulp.src(['./**/*.js', '!node_modules/**/*']),
+      gulp.src(['./**/*.js', '!node_modules/**/*', '!dist/**/*']),
       todo(),
       gulp.dest('./')
   ], function(e) {

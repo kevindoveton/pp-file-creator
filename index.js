@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-//TODO: fix silly webpack issue where we have to have 2 index.html files
 app.use('', express.static('./dist', {
     root: path.resolve(__dirname)
   })
