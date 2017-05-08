@@ -1,7 +1,8 @@
-const path = require('path'),
-      webpack = require('webpack'),
-      CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const fs = require('fs');
+const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const helpers = require('./config/helpers')
 const minify = process.env.NODE_ENV === 'production';
 const production = process.env.NODE_ENV === 'production';
 
@@ -65,6 +66,18 @@ module.exports = {
     hot: true,
     outputPath: path.join(__dirname, '/dist'),
     host: "0.0.0.0",
-    port: 3000
+    port: 3000,
+    historyApiFallback: false,
+    setup: function (app) {
+      app.use(function pushStateHook(req, res, next) {
+        var ext = path.extname(req.url);
+          if ((ext === '' || ext === '.html') && req.url !== '/') {
+            res.setHeader("Content-Type", "text/html");
+            fs.createReadStream(helpers.root('dist/index.html')).pipe(res);
+          } else {
+            next();
+          }
+      });
+    }
   }
 };

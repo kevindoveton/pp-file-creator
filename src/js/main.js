@@ -3,12 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // app
-import AppContainer from '/Containers/AppContainer'
+import Routes from '/Views/Routes'
 
 // css
 require('../styles/main.sass')
 
 ReactDOM.render(
-  <AppContainer />,
+  <Routes />,
   document.querySelector('#react-mount')
 );

@@ -1,4 +1,3 @@
 #!/bin/bash
-echo "sms-ui entrypoint"
-webpack -p --progress
+webpack --progress &
 npm run serve
