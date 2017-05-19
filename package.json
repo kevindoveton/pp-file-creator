@@ -47,6 +47,8 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.2.1",
     "react-bootstrap": "^0.30.0",
+    "react-dnd": "^2.4.0",
+    "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.5.4",
     "react-dropzone": "^3.12.4",
     "react-konva": "^1.1.3",

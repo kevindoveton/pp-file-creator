@@ -26,13 +26,12 @@ class Routes extends Component {
 
   render() {
     const NotFound = () => (<h1>404.. This page is not found!</h1>);
-
+    // TODO: implement react-dnd for drag and drop support
     return (
       <Router>
         <div>
           <Route exact path='/' component={AppContainer} />
           <Route path='/address' component={() => this.getAddress()} />
-          <Route path='*' component={() => this.get404()} />
         </div>
       </Router>
     );

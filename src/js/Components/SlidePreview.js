@@ -25,6 +25,8 @@ class SlidePreview extends React.Component {
       width: this.width,
       height: this.height
     });
+    
+    var startOffset = this.height;
       
     // TODO: get settings from pro5 template
     var text = new Konva.Text({
@@ -42,8 +44,8 @@ class SlidePreview extends React.Component {
       fill: '#fff',
       textDecoration: '',
       fontStyle: ''
-      
     });
+    
     var offset = (this.height - text.getHeight())/2;
     text.setY(offset);
     

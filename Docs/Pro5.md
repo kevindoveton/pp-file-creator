@@ -1,10 +1,3 @@
-## Vertical Alignment
-0 = Centered
-
-1 = Top (probably)
-
-2 = Bottom
-
 ## Slide Container
 ```xml
 <slides containerClass="NSMutableArray">
@@ -30,7 +23,13 @@
     </stroke>
 </RVTextElement>
 ```
-
+* RTFDate is base64 encoded RTF data (http://www.pindari.com/rtf1.html), all formatting happens in here
+* _-RVRect3d-_position is the position of the textbox
+* verticalAlignment
+    * 0 = Centered
+    * 1 = Top (probably, havent tested)
+    * 2 = Bottom
+    
 ## Images
 ```xml
 <RVMediaCue displayName="Screen Shot 2017-04-02 at 2.42.29 pm" delayTime="0" timeStamp="0" enabled="1" UUID="89A86D4D-B956-48D6-B4E4-0E950A48E9BF" parentUUID="89A86D4D-B956-48D6-B4E4-0E950A48E9BF" elementClassName="RVImageElement" behavior="1" alignment="4" serialization-array-index="0">
@@ -66,7 +65,8 @@
     </stroke>
 </RVImageElement>
 ```
-
+* fillColor = rgba (from 0 to 1)
+* source, file source - in form file://localhost/ + directory (can we use web images??)
 
 ## General start of document stuff
 ```xml
@@ -81,6 +81,11 @@
         <RVSlideGrouping name="" uuid="59C8F542-5919-4D71-BCB8-56CEFD328DFE" color="0 0 0 0" serialization-array-index="0">
             <slides containerClass="NSMutableArray">
 ```
+Notes: 
+* height = document height
+* width = document width
+* backgroundColor rgba (red, green, blue, alpha), from 0 to 1
+* uuid (from tests it doesnt really have to be unique)
 
 ## General end of document stuff
 ```xml
@@ -96,3 +101,4 @@
     </arrangements>
 </RVPresentationDocument>
 ```
+* uuid (from tests it doesnt really have to be unique)
