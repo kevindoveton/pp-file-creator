@@ -53,6 +53,7 @@ class SlidePreview extends React.Component {
     this.refs.layer.add(rect);
     this.refs.layer.add(text);
     this.refs.layer.draw();
+    console.log(this.props.slide);
   }
   
   render() {
