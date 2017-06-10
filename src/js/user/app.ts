@@ -9,9 +9,9 @@ angular.module('ppfilecreator', [
 	'ngAnimate',
 	'angularModalService',
 	'ui.router',
-	'autocomplete',
 	'angular-cache',
-	'LocalStorageModule'
+	'LocalStorageModule',
+	'angular-medium-editor',
 ]).
 config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
 	// ui router

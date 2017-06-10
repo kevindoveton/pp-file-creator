@@ -1,0 +1,26 @@
+{
+  "name": "pp-file-creator",
+  "description": "",
+  "authors": [
+    "Kevin Doveton"
+  ],
+  "private": true,
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-ui-router": "^0.4.2",
+    "angular-animate": "^1.6.4",
+    "angular-local-storage": "^0.5.2",
+    "angular-modal-service": "^0.12.1",
+    "medium-editor": "^5.23.0",
+    "angular-medium-editor": "^1.2.1",
+    "angular-cache": "^4.6.0"
+  },
+  "resolutions": {
+    "angular": "1.6.4"
+  },
+  "overrides": {
+    "medium-editor": {
+      "main": "dist/js/medium-editor.js"
+    }
+  }
+}

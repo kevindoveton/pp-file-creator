@@ -10,6 +10,7 @@ var gulp = require('gulp'),
 	pump = require('pump'),
 	concat = require('gulp-concat'),
 	ts = require("gulp-typescript"),
+	mainBowerFiles = require('main-bower-files'),
 	sourcemaps = require('gulp-sourcemaps');
 
 const tsProject = ts.createProject("tsconfig.json");
@@ -64,13 +65,18 @@ gulp.task('userjs', function(cb) {
 
 gulp.task('vendorjs', function(cb) {
 	pump([
-		gulp.src(paths.js_build + 'vendor/**/*.js'),
+		gulp.src(mainBowerFiles()),
 		sourcemaps.init(),
-		concat('vendor.js'),
 		uglify({
+			// output: {
+				// beautify: true,
+				// comments: true
+			// },
 			mangle: true,
 			compress: true,
+			preserveComments: 'license'
 		}),
+		concat('vendor.js'),
 		sourcemaps.write('maps'),
 		gulp.dest(paths.js_dist)
 	], function(e) {
@@ -80,7 +86,8 @@ gulp.task('vendorjs', function(cb) {
 		cb(null);
 	});
 	return;
-})
+
+});
 
 /**
  * Compile .scss files into public css directory With autoprefixer no
