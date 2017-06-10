@@ -10,4 +10,23 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
+  $scope.slides = [
+    {
+      id: 1,
+      htmlContent: ''
+    }
+  ];
+  
+  $scope.submit = function() {
+    console.log($scope.slides);
+  }
+  
+  $scope.addSlide = function(_id) {
+    
+  }
+  
+  $scope.removeSlide = function(_id) {
+    
+  }
+  
 });
