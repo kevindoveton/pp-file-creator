@@ -1,0 +1,37 @@
+.autocomplete
+	// font-size: 12px
+	width: 100%
+	position: relative
+
+	input
+		color: black 
+		// font-size: 1.2em
+		width: 100%
+		// padding: 0.4em
+
+	ul
+		position: absolute
+		left: 0
+		width: 100%
+		border-left: 1px solid $divider-color
+		border-right: 1px solid $divider-color
+		border-bottom: 1px solid $divider-color
+		z-index: 1
+
+	li
+		width: 100%
+		padding: 0.5em
+		cursor: pointer
+		background-color: #f9f9f9
+	
+	li.active
+		width: 100%
+		background-color: #f0f0f0
+
+	.highlight 
+		background-color: #E2E2E2
+
+
+	li.active .highlight
+		background: #666
+		color: #fff

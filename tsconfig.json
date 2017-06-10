@@ -1,0 +1,18 @@
+{
+    "include": [
+        "src/js/user/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.js",
+        "typings"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": false,
+        "target": "es5",
+        "module": "none",
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
+    }
+}

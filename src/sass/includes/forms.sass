@@ -1,0 +1,147 @@
+@import variables
+
+.inputField.half
+	width: 50%
+	display: inline-block
+	padding-right: 1em
+
+.inputField
+	position: relative
+	margin-top: 1rem
+	
+	input, textarea
+		background-color: transparent
+		border: none
+		border-bottom: 1px solid $divider-color
+		border-radius: 0
+		outline: none
+		height: 3rem
+		width: 100%
+		font-size: 1rem
+		margin: 0 0 20px 0
+		padding: 0
+		box-shadow: none
+		box-sizing: content-box
+		transition: all 0.3s
+		color: white
+		
+	label
+		color: #9e9e9e
+		position: absolute
+		top: 0.8rem
+		left: 0
+		font-size: 1rem
+		cursor: text
+		transition: .2s ease-out
+		
+	input:focus + label, textarea:focus + label
+		// color: #26a69a
+		color: $accent-color
+		font-size: .8rem
+		-webkit-transform: translateY(-140%)
+		transform: translateY(-140%)
+		
+	label.active
+		font-size: .8rem
+		-webkit-transform: translateY(-140%)
+		transform: translateY(-140%)
+
+	textarea
+		height: 4rem
+		margin-top: 1rem
+		line-height: 1.5em
+
+.black
+	input, textarea
+		color: $primary-text-color
+		
+.white
+	.autocomplete
+		color: black
+	input, textarea, select, option
+		color: white !important
+		
+.warn
+	input, textarea, select, option
+		border-bottom-color: red !important
+
+input[type="checkbox"]
+	position: absolute
+	top: -9999px
+	left: -9999px
+	
+$checkboxSize: 18px	
+
+input[type="checkbox"] ~ span.checkbox
+	width: $checkboxSize
+	height: $checkboxSize
+	display: inline-block
+	// border: 3px solid white
+	background-color: #f9f9f9
+	transition: .3s all
+	margin: .5em
+	
+input[type="checkbox"]:checked ~ span.checkbox
+	transform: rotate(45deg)
+	transform-origin: top center
+	background: none
+	width: $checkboxSize
+	border-right: 3px solid white
+	
+	&::before
+		content: ''
+		background-color: inherit
+		position: absolute
+		bottom: 0
+		left: 50%
+		width: 50%
+		height: 100%
+		border-bottom: 3px solid white
+
+label.black
+	input[type="checkbox"] ~ span.checkbox
+		background-color: none
+		border: 3px solid black
+	input[type="checkbox"]:checked ~ span.checkbox
+		border: none
+		border-right: 3px solid black
+		&::before
+			border-bottom: 3px solid black
+#orderForm
+	.inputField
+		display: inline-block
+		margin: .5em
+		
+	.itemName
+		width: 50%
+	.quantity
+		width: 30%
+button.remove
+	margin: .5em
+	display: inline-block
+	width: 50px
+	height: 50px
+	
+div.customer
+	.inputField
+		display: inline-block
+		width: 90%
+
+	button
+		margin: .5em
+		display: inline-block
+		width: 50px
+		height: 50px
+		
+select
+	height: 3rem
+	width: 100%
+	font-size: 1rem
+	margin: 0 0 20px 0
+	border: 0
+	border-radius: 0
+	outline: none
+	appearance: none
+	background-color: inherit
+	border-bottom: 1px solid $divider-color
+	

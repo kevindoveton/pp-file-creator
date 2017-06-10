@@ -1,0 +1,27 @@
+{
+  "name": "rc-inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/www",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Doveton",
+  "license": "ISC",
+  "dependencies": {
+    "@types/angular": "^1.6.17",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-pug": "^3.0.3",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-typescript": "^3.1.6",
+    "gulp-uglify": "^2.0.0",
+    "minimist": "^1.2.0",
+    "pug": "^2.0.0-beta6",
+    "pump": "^1.0.1",
+    "typescript": "^2.3.2"
+  },
+  "devDependencies": {}
+}
