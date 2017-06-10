@@ -1,0 +1,29 @@
+@import variables
+
+#login
+  background-color: $primary-color-dark
+  width: 100%
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  
+  button.login
+    box-shadow: none
+  
+  div.loginBox
+    // height: 300px
+    width: 600px
+    max-width: 80%
+    background-color: rgba(#222, 0.9)
+    border-radius: 1em
+    border: 2px solid rgba($divider-color, 0.05)
+
+  p.error
+    display: none
+    color: red
+  p.showError
+    display: block !important
+
+  div.inputField
+    margin: 1em

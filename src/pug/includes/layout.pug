@@ -1,0 +1,26 @@
+html(ng-app="ppfilecreator")
+  head
+    meta(charset='utf8')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    base(href='/')
+    title PP File Creator 
+    link(rel="stylesheet", type="text/css", href="/css/styles.css")
+    //- <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+
+  body(ng-controller='AppCtrl')
+    div.title.noPrint(ng-show="showHeader")
+      
+    div.bodyContent
+      block body
+
+    div.footer.noPrint(ng-show="showFooter")
+      div.navigation
+        ul
+          li
+            a(ui-sref="home")
+              p Home
+
+
+    script(src='/js/vendor.js')
+    script(src='/js/dist.js')
