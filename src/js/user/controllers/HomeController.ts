@@ -5,14 +5,17 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       'buttons': [
         'bold', 
         'italic', 
-        'underline'
+        'underline',
+        'h1',
+        'superscript',
+        'orderedlist',
+        'unorderedlist',
       ]
     }
   }
   
   $scope.slides = [
     {
-      id: 1,
       htmlContent: ''
     }
   ];
@@ -21,12 +24,27 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     console.log($scope.slides);
   }
   
-  $scope.addSlide = function(_id) {
-    
+  $scope.addSlide = function(position:number) {
+    $scope.slides = insertToArray($scope.slides, position, {htmlContent:''})
   }
   
-  $scope.removeSlide = function(_id) {
-    
+  $scope.removeSlide = function(position:number) {
+    $scope.slides = removeFromArray($scope.slides, position)
   }
   
 });
+
+function insertToArray(arr:Array<object>, position:number, item:object) {
+  if (typeof(position) !== 'undefined') {
+    arr.splice(position, 0, item);
+  } else {
+    arr.push(item);
+  }
+  
+  return arr;
+}
+
+function removeFromArray(arr:Array<object>, position:number) {
+  arr.splice(position, 1);
+  return arr;
+}
