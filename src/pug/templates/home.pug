@@ -1,4 +1,7 @@
 div.container
-
-	h1 Make some slides!
-	div(ng-model="description" medium-editor bind-options="toolbar" data-placeholder="Enter a description")
+  .row
+    .col-xs-12
+      h1 Make some slides!
+  
+  div
+    include ../includes/SingleSlide

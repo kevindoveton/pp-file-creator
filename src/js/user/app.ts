@@ -26,6 +26,6 @@ config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
 	$stateProvider.state(homeState);
 	
 	// default route
-	// $urlRouterProvider.otherwise('/home'); 
+	$urlRouterProvider.otherwise('/home'); 
 
 });
