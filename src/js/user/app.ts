@@ -1,7 +1,7 @@
 'use strict';
 // Declare app level module which depends on filters, and services
 
-angular.module('inventoryApp', [
+angular.module('ppfilecreator', [
 	'ppfilecreator.controllers',
 	'ppfilecreator.filters',
 	'ppfilecreator.services',
@@ -18,16 +18,14 @@ config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
 	var homeState = {
 		name: 'home',
 		url: '/home',
-		templateUrl: '/templates/home',
+		templateUrl: '/templates/home.html',
 		controller: 'HomeCtrl'
 	}
-	
 	
 	// register states
 	$stateProvider.state(homeState);
 	
-	
 	// default route
-	$urlRouterProvider.otherwise('/home'); 
+	// $urlRouterProvider.otherwise('/home'); 
 
 });

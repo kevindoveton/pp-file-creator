@@ -1,5 +1,5 @@
 /*===========   API Service    ===========*/
-angular.module('inventoryApp').factory('HttpService', function (CacheFactory, $http, $q, localStorageService, $state) {
+angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $http, $q, localStorageService, $state) {
 
 	if (!CacheFactory.get('dataCache')) {3
 		CacheFactory.createCache('dataCache', {
