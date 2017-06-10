@@ -23,22 +23,22 @@ class SlideStore extends ReduceStore {
   }
 
   reduce(state, action) {
-      switch (action.type) {
-        case SlideActionTypes.ADD_SLIDE:
-          const id = Counter.increment();
-          return state.set(id, new SlideModel({
-            id,
-            text: ''
-          }));
+    switch (action.type) {
+      case SlideActionTypes.ADD_SLIDE:
+        const id = Counter.increment();
+        return state.set(id, new SlideModel({
+          id,
+          text: ''
+        }));
 
-        case SlideActionTypes.EDIT_SLIDE_TEXT:
-          return state.setIn([action.id, 'text', ], action.text);
+      case SlideActionTypes.EDIT_SLIDE_TEXT:
+        return state.setIn([action.id, 'text', ], action.text);
 
-        case SlideActionTypes.EDIT_SLIDE_STATE:
-          return state.setIn([action.id, 'state', ], action.state);
+      case SlideActionTypes.EDIT_SLIDE_STATE:
+        return state.setIn([action.id, 'state', ], action.state);
 
-        default:
-          return state;
+      default:
+        return state;
     }
   }
 }
