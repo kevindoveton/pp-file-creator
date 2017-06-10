@@ -22,6 +22,13 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   
   $scope.submit = function() {
     console.log($scope.slides);
+    
+    HttpService.CreateNewDocument({
+      slides: $scope.slides
+    }).then(function() {
+      alert('success');
+    });
+    
   }
   
   $scope.addSlide = function(position:number) {

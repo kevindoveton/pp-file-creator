@@ -3,7 +3,10 @@ div.container
     .col-xs-12
       div.header
         h1 Make some slides!
-        button(ng-click="addSlide()") +
+
+  .row(ng-show="slides.length == 0")
+    .col-xs-12.submit
+      button(ng-click="addSlide()") Create your first slide!
 
   .row(ng-repeat="slide in slides")
     .col-md-8
@@ -16,5 +19,5 @@ div.container
       button(style="width: 100%;" ng-click="removeSlide($index)") -
 
   .row
-    .col-xs-12.submit
+    .col-xs-12.submit(ng-show="slides.length > 0")
       button(ng-click="submit()") Submit

@@ -1,6 +1,8 @@
 /*===========   API Service    ===========*/
 angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $http, $q, localStorageService, $state) {
-
+  
+  const BASE_URL = 'http://localhost:4000/api/v1/';
+  
   if (!CacheFactory.get('dataCache')) {3
     CacheFactory.createCache('dataCache', {
       maxAge: .3 * 60 * 1000,
@@ -40,7 +42,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     } else {
       $http({
           method: 'GET',
-          url: url,
+          url: BASE_URL+url,
           headers: {
             'x-token': localStorageService.get('accessToken')
           }
@@ -60,7 +62,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     
     $http({
       method: 'POST',
-      url: url, 
+      url: BASE_URL+url, 
       data: data,
       headers: {
         'Content-Type': 'application/json',
@@ -84,8 +86,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
   };
   
   return {
-    addBatch: function(data) {
-      return postJson('/api/batches/add', data);
+    CreateNewDocument: function(data) {
+      return postJson('/files/', data);
     },
     
     // ------------------------
