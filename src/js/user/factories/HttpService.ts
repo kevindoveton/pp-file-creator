@@ -92,6 +92,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     
     // ------------------------
     // login
+    // TODO: implement this server side
     // ------------------------
     login: function(data) {
       return postJson('/api/auth/login', data, function(d) {

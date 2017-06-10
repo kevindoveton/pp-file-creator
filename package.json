@@ -25,5 +25,7 @@
     "pump": "^1.0.1",
     "typescript": "^2.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp-todo": "^5.4.0"
+  }
 }

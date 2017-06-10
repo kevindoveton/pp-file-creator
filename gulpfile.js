@@ -12,6 +12,7 @@ const ts = require("gulp-typescript");
 const mainBowerFiles = require('main-bower-files');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync');
+const todo = require('gulp-todo');
 
 
 const tsProject = ts.createProject("tsconfig.json");
@@ -186,3 +187,24 @@ gulp.task('assets', function(cb) {
     cb(null);
   });
 })
+
+
+// generate a todo.md from your javascript files
+// -> Will output a TODO.md with your todos 
+gulp.task('todo', function(cb) {
+  pump([
+      gulp.src([
+        './**/*.ts', './**/*.pug', './**/*.sass',
+        '!node_modules/**/*', '!bower_components/**/*', '!dist/**/*'
+      ]),
+      todo(),
+      gulp.dest('./')
+  ], function(e) {
+    if (typeof(e) != 'undefined') {
+      console.log(e);
+      process.exit(1);
+    } else {
+      cb();
+    }
+  })
+});
