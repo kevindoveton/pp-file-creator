@@ -25,14 +25,16 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     
     HttpService.CreateNewDocument({
       slides: $scope.slides
-    }).then(function() {
-      alert('success');
+    }).then(function(d) {
+      if (typeof(d.success) !== 'undefined' && d.success == true) {
+        alert('success');
+      }
     });
     
   }
   
   $scope.addSlide = function(position:number) {
-    $scope.slides = insertToArray($scope.slides, position, {htmlContent:''})
+    $scope.slides = insertToArray($scope.slides, position+1, {htmlContent:''})
   }
   
   $scope.removeSlide = function(position:number) {
@@ -40,6 +42,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   }
   
 });
+
 
 function insertToArray(arr:Array<object>, position:number, item:object) {
   if (typeof(position) !== 'undefined') {
