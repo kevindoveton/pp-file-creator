@@ -1,4 +1,4 @@
-angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, ModalService, HttpService) {
+angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, ModalService, HttpService, FileSaver, Blob) {
   
   $scope.toolbar = {
     'toolbar': {
@@ -26,8 +26,9 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     HttpService.CreateNewDocument({
       slides: $scope.slides
     }).then(function(d) {
-      if (typeof(d.success) !== 'undefined' && d.success == true) {
-        alert('success');
+      if (typeof(d.status) !== 'undefined' && d.status == 200) {
+        var data = new Blob([d.data], { type: 'text/xml;charset=utf-8' });
+        FileSaver.saveAs(data, 'file.pro5');
       } else {
         alert('failed');
       }
