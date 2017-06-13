@@ -1,5 +1,7 @@
 "use strict";
 
+const API_URL = process.env.NODE_ENV == 'production' ? 'http://dev1.kdoveton.com:5000' : 'http://localhost:4000';
+
 const gulp = require('gulp');
 const path = require('path');
 const pug = require('gulp-pug');
@@ -13,7 +15,7 @@ const mainBowerFiles = require('main-bower-files');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync');
 const todo = require('gulp-todo');
-
+const replace = require('gulp-replace');
 
 const tsProject = ts.createProject("tsconfig.json");
 
@@ -48,6 +50,7 @@ gulp.task('userjs', function(cb) {
   // User
   pump([
     typescript(),
+    replace('__API-URL__', API_URL),
     sourcemaps.init(),
     uglify({
       mangle: false,

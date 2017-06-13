@@ -1,7 +1,7 @@
 /*===========   API Service    ===========*/
 angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $http, $q, localStorageService, $state) {
   
-  const BASE_URL = 'http://localhost:5000/api/v1/';
+  const BASE_URL = '__API-URL__/api/v1/';
   
   if (!CacheFactory.get('dataCache')) {3
     CacheFactory.createCache('dataCache', {
