@@ -14,6 +14,7 @@ div.container
         div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide.")
     .col-md-3.hidden-sm-down
       div.preview
+        p Preview Window... {{$index + 1}}
     .col-md-1
       button(style="width: 100%;" ng-click="addSlide($index)") +
       button(style="width: 100%;" ng-click="removeSlide($index)") -
