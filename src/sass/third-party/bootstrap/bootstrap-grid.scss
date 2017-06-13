@@ -41,3 +41,7 @@ html {
 @import "custom";
 
 @import "grid";
+
+// Utility classes
+@import "mixins/visibility";
+@import "utilities/visibility";
