@@ -30,7 +30,7 @@ var paths = new function() {
   this.sass = this.base_build + 'sass/';
   this.js_build = this.base_build + 'js/';
   this.pug = this.base_build + 'pug/';
-  
+
   this.assets = './assets/';
 };
 
@@ -39,12 +39,12 @@ gulp.task('js', ['userjs', 'vendorjs'], function() {
 });
 
 gulp.task('userjs', function(cb) {
-  
+
   // return tsProject.src().pipe(tsProject()).js.pipe(gulp.dest(paths.js_dist))
   function typescript() {
     return tsProject.src().pipe(tsProject()).js;
   }
-  
+
   // User
   pump([
     typescript(),
@@ -71,8 +71,8 @@ gulp.task('vendorjs', function(cb) {
     sourcemaps.init(),
     uglify({
       // output: {
-        // beautify: true,
-        // comments: true
+      // beautify: true,
+      // comments: true
       // },
       mangle: true,
       compress: true,
@@ -96,7 +96,7 @@ gulp.task('vendorjs', function(cb) {
  * Compile .scss files into public css directory With autoprefixer no
  * need for vendor prefixes then live reload the browser.
  */
-gulp.task('sass', function (cb) {
+gulp.task('sass', function(cb) {
   pump([
     gulp.src(paths.sass + '*.sass'),
     sass({
@@ -109,12 +109,13 @@ gulp.task('sass', function (cb) {
         '> 1%',
         'ie 8',
         'ie 7'
-      ],
-      {
+      ], {
         cascade: true
       }
     ),
-    browserSync.reload({ stream: true }),
+    browserSync.reload({
+      stream: true
+    }),
     gulp.dest(paths.css),
   ], function(e) {
     if (e !== undefined) {
@@ -125,12 +126,14 @@ gulp.task('sass', function (cb) {
   return;
 });
 
-gulp.task('pug', function (cb) {
+gulp.task('pug', function(cb) {
   pump([
-    gulp.src([paths.pug + '**/*.pug', '!' + paths.pug + 'includes/*.pug']),
+    gulp.src([paths.pug + '**/*.pug', '!' + paths.pug +
+      'includes/*.pug'
+    ]),
     pug(),
     gulp.dest(paths.html_dist)
-  ],function(e) {
+  ], function(e) {
     if (e !== undefined) {
       console.log(e);
     }
@@ -144,16 +147,15 @@ gulp.task('pug', function (cb) {
  * Watch scss files for changes & recompile
  * Watch .pug files run pug-rebuild then reload BrowserSync
  */
-gulp.task('watch', function () {
+gulp.task('watch', function() {
   gulp.watch(paths.sass + '**/*.sass', ['sass']);
-  gulp.watch(paths.js_build + 'user/**/*.js', ['userjs']);
-  gulp.watch(paths.js_build + 'user/**/*.ts', ['userjs']);
+  gulp.watch(paths.js_build + '**/*.ts', ['userjs']);
   gulp.watch(paths.js_build + 'vendor/**/*.js', ['vendorjs']);
   gulp.watch(paths.pug + '**/*.pug', ['pug']);
   gulp.watch('./assets/**/*', ['assets']);
 });
 
-gulp.task('browser-sync', ['sass', 'pug', 'js'], function () {
+gulp.task('browser-sync', ['sass', 'pug', 'js'], function() {
   browserSync({
     server: {
       baseDir: paths.base_dist
@@ -176,8 +178,9 @@ gulp.task('assets', function(cb) {
   const assets = paths.assets;
   pump([
     gulp.src([
-      assets+'**/*.ttf',assets+'**/*.woff?(2)', // fonts
-      assets+'**/*.jpg', assets+'**/*.svg', assets+'**/*.png', assets+'**/*.bmp', assets+'**/*.ico' // images
+      assets + '**/*.ttf', assets + '**/*.woff?(2)', // fonts
+      assets + '**/*.jpg', assets + '**/*.svg', assets +
+      '**/*.png', assets + '**/*.bmp', assets + '**/*.ico' // images
     ]),
     gulp.dest(paths.base_dist)
   ], function(e) {
@@ -193,12 +196,13 @@ gulp.task('assets', function(cb) {
 // -> Will output a TODO.md with your todos 
 gulp.task('todo', function(cb) {
   pump([
-      gulp.src([
-        './**/*.ts', './**/*.pug', './**/*.sass',
-        '!node_modules/**/*', '!bower_components/**/*', '!dist/**/*'
-      ]),
-      todo(),
-      gulp.dest('./')
+    gulp.src([
+      './**/*.ts', './**/*.pug', './**/*.sass',
+      '!node_modules/**/*', '!bower_components/**/*',
+      '!dist/**/*'
+    ]),
+    todo(),
+    gulp.dest('./')
   ], function(e) {
     if (typeof(e) != 'undefined') {
       console.log(e);

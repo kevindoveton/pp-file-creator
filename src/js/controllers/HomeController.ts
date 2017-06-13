@@ -28,6 +28,8 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }).then(function(d) {
       if (typeof(d.success) !== 'undefined' && d.success == true) {
         alert('success');
+      } else {
+        alert('failed');
       }
     });
     
