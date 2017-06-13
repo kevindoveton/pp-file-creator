@@ -7,12 +7,14 @@ angular.module('ppfilecreator', [
   'ppfilecreator.services',
   'ppfilecreator.directives',
   'ngAnimate',
+  'ngSanitize',
   'angularModalService',
   'ui.router',
   'angular-cache',
   'LocalStorageModule',
   'angular-medium-editor',
   'ngFileSaver',
+  'pw.canvas-painter'
 ]).
 config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
   // ui router

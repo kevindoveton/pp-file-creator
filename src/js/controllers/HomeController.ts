@@ -1,3 +1,6 @@
+const TEXT_SLIDE = { htmlContent: '', type: 'TEXT_SLIDE' };
+const BIBLE_SLIDE = { fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', htmlContent: '', type: 'BIBLE_SLIDE' };
+const IMAGE_SLIDE = { path: '', type: 'IMAGE_SLIDE' };
 angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, ModalService, HttpService, FileSaver, Blob) {
   
   $scope.toolbar = {
@@ -14,11 +17,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
-  $scope.slides = [
-    {
-      htmlContent: ''
-    }
-  ];
+  $scope.slides = [TEXT_SLIDE];
   
   $scope.submit = function() {
     console.log($scope.slides);
@@ -36,16 +35,38 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     
   }
   
-  $scope.addSlide = function(position:number) {
-    $scope.slides = insertToArray($scope.slides, position+1, {htmlContent:''})
-  }
+  // $scope.addSlide = function(position:number) {
+  //   $scope.slides = insertToArray($scope.slides, position+1, {htmlContent:''})
+  // }
   
   $scope.removeSlide = function(position:number) {
     $scope.slides = removeFromArray($scope.slides, position)
   }
   
+  $scope.addSlide = function(position) {
+    ModalService.showModal({
+      templateUrl: "/modals/newSlide.html",
+      controller: "NewSlideModalCtrl"
+    }).then(function(modal) {
+      modal.close.then(function(result) {
+        switch (result) {
+          case 'TEXT':
+            $scope.slides = insertToArray($scope.slides, position+1, TEXT_SLIDE);
+            break;
+          case 'IMAGE':
+            $scope.slides = insertToArray($scope.slides, position+1, IMAGE_SLIDE);
+            break;
+          case 'BIBLE':
+            $scope.slides = insertToArray($scope.slides, position+1, BIBLE_SLIDE);
+            break;
+        }
+      });
+    });
+  };
+  
+  
+  
 });
-
 
 function insertToArray(arr:Array<object>, position:number, item:object) {
   if (typeof(position) !== 'undefined') {
@@ -61,3 +82,12 @@ function removeFromArray(arr:Array<object>, position:number) {
   arr.splice(position, 1);
   return arr;
 }
+
+
+angular.module('ppfilecreator.controllers').controller('NewSlideModalCtrl', function($scope, $state, close) {
+  $scope.close = close;
+  
+  $scope.slide = function (type:string) {
+    return close(type);
+  }
+});

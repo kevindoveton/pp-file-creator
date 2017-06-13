@@ -10,11 +10,32 @@ div.container
 
   .row(ng-repeat="slide in slides")
     .col-md-8
-      div.editor
+      //- bible verse picker - used for bible slides
+      div(ng-show="slide.type == 'BIBLE_SLIDE'")
+        .inputField.half.black
+          input(type="text" ng-model="slide.fullRef" ng-blur="getVerse($index)")
+          label.active Verse
+        .inputField.half.black
+          select
+            option NIV
+            option MSG
+            option NLT
+          label.active Translation
+
+      //- image picker - used for image slide
+      div(ng-show="slide.type == 'IMAGE_SLIDE'")
+        input(type="file")
+
+      //- editor - show for all but image slide
+      div.editor(ng-show="slide.type != 'IMAGE_SLIDE'")
         div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide.")
+
+
     .col-md-3.hidden-sm-down
       div.preview
-        p Preview Window... {{$index + 1}}
+        .box
+          p
+            span(ng-bind-html="slide.htmlContent")
     .col-md-1
       button(style="width: 100%;" ng-click="addSlide($index)") +
       button(style="width: 100%;" ng-click="removeSlide($index)") -

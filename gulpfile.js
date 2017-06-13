@@ -182,8 +182,9 @@ gulp.task('assets', function(cb) {
   pump([
     gulp.src([
       assets + '**/*.ttf', assets + '**/*.woff?(2)', // fonts
-      assets + '**/*.jpg', assets + '**/*.svg', assets +
-      '**/*.png', assets + '**/*.bmp', assets + '**/*.ico' // images
+      assets + '**/*.jpg', assets + '**/*.svg', 
+      assets + '**/*.png', assets + '**/*.bmp', 
+      assets + '**/*.ico' // images
     ]),
     gulp.dest(paths.base_dist)
   ], function(e) {
