@@ -32,10 +32,10 @@ div.container
 
 
     .col-md-3.hidden-sm-down
-      div.preview
-        .box
-          p
-            span(ng-bind-html="slide.htmlContent")
+      div.preview(ng-style="preview.container")
+        .box(ng-style="preview.box")
+          .inner.box(ng-style="preview.innerbox")
+            .content(ng-bind-html="slide.htmlContent")
     .col-md-1
       button(style="width: 100%;" ng-click="addSlide($index)") +
       button(style="width: 100%;" ng-click="removeSlide($index)") -

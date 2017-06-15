@@ -76,6 +76,30 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     });
   };
   
+  // TODO: get this dynamically
+  $scope.preview = {
+    container: {
+      background: '#000',
+      width: '1920px',
+      height: '1080px'
+    },
+    
+    box: {
+      top: '462.08px',
+      left: '61.22px',
+      width: '1797.547px',
+      height: '803.8289px'
+    },
+    
+    innerbox: {
+      'font-family': 'Helvetica',
+      'font-size': '96px',
+      'text-align': 'center', // left, center, right
+      'align-items': 'center', // flex-start, center, flex-end
+      'justify-content': 'center' // flex-start, center, flex-end
+    }
+  }
+  
   
   
 });
