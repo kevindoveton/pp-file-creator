@@ -1,6 +1,18 @@
-const TEXT_SLIDE = { htmlContent: '', type: 'TEXT_SLIDE' };
-const BIBLE_SLIDE = { fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', htmlContent: '', type: 'BIBLE_SLIDE' };
-const IMAGE_SLIDE = { path: '', type: 'IMAGE_SLIDE' };
+const TEXT_SLIDE = function() { return { id: guid(), htmlContent: '', type: 'TEXT_SLIDE' } };
+const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', htmlContent: '', type: 'BIBLE_SLIDE' } };
+const IMAGE_SLIDE = function() { return { id: guid(), path: '', type: 'IMAGE_SLIDE' } };
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
+
 angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, ModalService, HttpService, FileSaver, Blob) {
   
   $scope.toolbar = {
@@ -17,7 +29,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
-  $scope.slides = [TEXT_SLIDE];
+  $scope.slides = [TEXT_SLIDE()];
   
   $scope.submit = function() {
     console.log($scope.slides);
@@ -51,13 +63,13 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       modal.close.then(function(result) {
         switch (result) {
           case 'TEXT':
-            $scope.slides = insertToArray($scope.slides, position+1, TEXT_SLIDE);
+            $scope.slides = insertToArray($scope.slides, position+1, TEXT_SLIDE());
             break;
           case 'IMAGE':
-            $scope.slides = insertToArray($scope.slides, position+1, IMAGE_SLIDE);
+            $scope.slides = insertToArray($scope.slides, position+1, IMAGE_SLIDE());
             break;
           case 'BIBLE':
-            $scope.slides = insertToArray($scope.slides, position+1, BIBLE_SLIDE);
+            $scope.slides = insertToArray($scope.slides, position+1, BIBLE_SLIDE());
             break;
         }
       });
