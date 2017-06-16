@@ -38,6 +38,6 @@ config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
   });
   
   // default route
-  // $urlRouterProvider.otherwise('/home'); 
+  $urlRouterProvider.otherwise('/home'); 
 
 });
