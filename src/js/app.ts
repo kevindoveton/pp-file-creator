@@ -14,21 +14,30 @@ angular.module('ppfilecreator', [
   'LocalStorageModule',
   'angular-medium-editor',
   'ngFileSaver',
-  'pw.canvas-painter'
+  'angularFileUpload'
 ]).
 config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
   // ui router
-  var homeState = {
-    name: 'home',
+  // register states
+  $stateProvider.state('home', {
     url: '/home',
     templateUrl: '/templates/home.html',
     controller: 'HomeCtrl'
-  }
+  });
   
-  // register states
-  $stateProvider.state(homeState);
+  $stateProvider.state('files', {
+    url: '/file',
+    templateUrl: '/templates/file.html',
+    controller: 'FileCtrl'
+  });
+  
+  $stateProvider.state('templates', {
+    url: '/template',
+    templateUrl: '/templates/template.html',
+    controller: 'TemplateCtrl'
+  });
   
   // default route
-  $urlRouterProvider.otherwise('/home'); 
+  // $urlRouterProvider.otherwise('/home'); 
 
 });

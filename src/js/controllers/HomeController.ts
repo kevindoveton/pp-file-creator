@@ -32,8 +32,6 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   $scope.slides = [TEXT_SLIDE()];
   
   $scope.submit = function() {
-    console.log($scope.slides);
-    
     HttpService.CreateNewDocument({
       slides: $scope.slides
     }).then(function(d) {
@@ -44,7 +42,6 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
         alert('failed');
       }
     });
-    
   }
   
   // $scope.addSlide = function(position:number) {
