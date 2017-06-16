@@ -1,5 +1,5 @@
 const TEXT_SLIDE = function() { return { id: guid(), htmlContent: '', type: 'TEXT_SLIDE' } };
-const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', htmlContent: '', type: 'BIBLE_SLIDE' } };
+const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', children: [], type: 'BIBLE_SLIDE' } };
 const IMAGE_SLIDE = function() { return { id: guid(), path: '', type: 'IMAGE_SLIDE' } };
 
 function guid() {
@@ -47,6 +47,16 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   $scope.getVerse = function(ref, index) {
     // const slide = $scope.slides[index]
     let pos = index;
+    let parent = $scope.slides[index];
+
+    for (var i = 0; i < parent.children.length; i++) {
+      for (var j = 0; j < $scope.slides.length; j++) {
+        if ($scope.slides[j].id == parent.children[i]) {
+          removeFromArray($scope.slides, j);
+        }
+      }
+    }
+    
     if (parseInt(ref.match(/\d+/)[0]) == NaN) {
       return;
     }
@@ -56,6 +66,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       for (var i = 0; i < d.length; i++) {
         if (verse != d[i].verse) {
           $scope.slides = insertToArray($scope.slides, pos+1, TEXT_SLIDE());
+          parent.children.push($scope.slides[pos+1].id);
           pos++;
         }
         
@@ -71,6 +82,18 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   }
   
   $scope.removeSlide = function(position:number) {
+    // if the slide has children, remove them first
+    if (typeof($scope.slides[position].children) !== 'undefined') {
+      let parent = $scope.slides[position];
+      for (var i = 0; i < parent.children.length; i++) {
+        for (var j = 0; j < $scope.slides.length; j++) {
+          if ($scope.slides[j].id == parent.children[i]) {
+            $scope.slides = removeFromArray($scope.slides, j);
+          }
+        }
+      }
+    }
+    // remove the slide
     $scope.slides = removeFromArray($scope.slides, position)
   }
   
