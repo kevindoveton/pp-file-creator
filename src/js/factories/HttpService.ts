@@ -42,9 +42,9 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     } else {
       $http({
           method: 'GET',
-          url: BASE_URL+url,
+          url: url,
           headers: {
-            'x-token': localStorageService.get('accessToken')
+            // 'x-token': localStorageService.get('accessToken')
           }
       }).then(function (data) {
         dataCache.put(url, data);
@@ -62,7 +62,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     
     $http({
       method: 'POST',
-      url: BASE_URL+url, 
+      url: url, 
       data: data,
       headers: {
         'Content-Type': 'application/json',
@@ -86,12 +86,16 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
   };
   
   return {
-    CreateNewDocument: function(data) {
-      return postJson('/files/', data);
+    CreateNewDocument: function(d) {
+      return postJson(BASE_URL+'/files/', d);
     },
     
     GetTemplates: function() {
-      return getUrlAndCache('/templates/');
+      return getUrlAndCache(BASE_URL+'/templates/');
+    },
+    
+    GetVerse: function(d) {
+      return getUrlAndCache('https://familycentre.org.au/cfcapp/search/?json=true&v=NLT&ref='+encodeURI(d));
     },
     
     // ------------------------
@@ -99,7 +103,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     // TODO: implement this server side
     // ------------------------
     login: function(data) {
-      return postJson('/api/auth/login', data, function(d) {
+      return postJson(BASE_URL+'/auth/login', data, function(d) {
         if (d.data.loginStatus == true) {
           // TODO: user storage.. find a better way of reauthorising
           // localStorageService.set('user', data);

@@ -13,7 +13,7 @@ div.container
       //- bible verse picker - used for bible slides
       div(ng-show="slide.type == 'BIBLE_SLIDE'")
         .inputField.half.black
-          input(type="text" ng-model="slide.fullRef" ng-blur="getVerse($index)")
+          input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide.fullRef, $index)")
           label.active Verse
         .inputField.half.black
           select
@@ -27,11 +27,11 @@ div.container
         input(type="file")
 
       //- editor - show for all but image slide
-      div.editor(ng-show="slide.type != 'IMAGE_SLIDE'")
+      div.editor(ng-show="slide.type == 'TEXT_SLIDE'")
         div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide.")
 
 
-    .col-md-3.hidden-sm-down
+    .col-md-3.hidden-sm-down(ng-show="slide.type !== 'BIBLE_SLIDE'")
       div.preview(ng-style="preview.container")
         .box(ng-style="preview.box")
           .inner.box(ng-style="preview.innerbox")

@@ -44,9 +44,31 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     });
   }
   
-  // $scope.addSlide = function(position:number) {
-  //   $scope.slides = insertToArray($scope.slides, position+1, {htmlContent:''})
-  // }
+  $scope.getVerse = function(ref, index) {
+    // const slide = $scope.slides[index]
+    let pos = index;
+    if (parseInt(ref.match(/\d+/)[0]) == NaN) {
+      return;
+    }
+    HttpService.GetVerse(ref).then((success) => {
+      const d = success.data;
+      let verse = '';
+      for (var i = 0; i < d.length; i++) {
+        if (verse != d[i].verse) {
+          $scope.slides = insertToArray($scope.slides, pos+1, TEXT_SLIDE());
+          pos++;
+        }
+        
+        var slide = $scope.slides[pos];
+        slide.htmlContent += '<p>';
+        if (verse != d[i].verse) {
+          slide.htmlContent += '<sup>'+d[i].verse+'</sup>';
+        }
+        slide.htmlContent += d[i].text+'</p>';
+        verse = d[i].verse;
+      }
+    });
+  }
   
   $scope.removeSlide = function(position:number) {
     $scope.slides = removeFromArray($scope.slides, position)
