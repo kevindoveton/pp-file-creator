@@ -15,6 +15,13 @@ function guid() {
 
 angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, ModalService, HttpService, FileSaver, Blob) {
   
+  $scope.sermon = {
+    title: '',
+    date: '',
+    slides: []
+  }
+  $scope.slides = $scope.sermon.slides;
+  
   $scope.toolbar = {
     'toolbar': {
       'buttons': [
@@ -32,9 +39,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   $scope.slides = [TEXT_SLIDE()];
   
   $scope.submit = function() {
-    HttpService.CreateNewDocument({
-      slides: $scope.slides
-    }).then(function(d) {
+    HttpService.CreateNewDocument($scope.sermon).then(function(d) {
       if (typeof(d.status) !== 'undefined' && d.status == 200) {
         var data = new Blob([d.data], { type: 'text/xml;charset=utf-8' });
         FileSaver.saveAs(data, 'file.pro5');

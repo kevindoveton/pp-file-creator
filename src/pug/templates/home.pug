@@ -3,6 +3,16 @@ div.container
     .col-xs-12
       div.header
         h1 Make some slides!
+    
+  .row
+    .col-sm-6
+      .inputField.black
+        input(type="text" ng-model="sermon.title")
+        label.active Title
+    .col-sm-6
+      .inputField.black
+        input(type="date" ng-model="sermon.date")
+        label.active Date
 
   .row(ng-show="slides.length == 0")
     .col-xs-12.submit
