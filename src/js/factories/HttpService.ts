@@ -90,6 +90,10 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       return postJson(BASE_URL+'/files/', d);
     },
     
+    GetDocuments: function(d) {
+      return getUrlAndCache(BASE_URL+'/files/', d);
+    },
+    
     GetTemplates: function() {
       return getUrlAndCache(BASE_URL+'/templates/');
     },

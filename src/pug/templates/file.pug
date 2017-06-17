@@ -3,11 +3,12 @@ div.container
     .col-xs-12
       h1 Files
   
-  .row
+  .row(ng-repeat="presentation in presentations")
     .col-md-3
       div(style="width: 100%; height: 8em; background: #333")
     .col-md-6
       div
-        h2 {{title}}
+        h2 {{presentation.title}}
+        p {{presentation.date}}
     .col-md-3
-      button Download
+        button(ng-click="download($index)") Download

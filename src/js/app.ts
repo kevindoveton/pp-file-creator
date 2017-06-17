@@ -14,7 +14,7 @@ angular.module('ppfilecreator', [
   'LocalStorageModule',
   'angular-medium-editor',
   'ngFileSaver',
-  'angularFileUpload'
+  'angularFileUpload',
 ]).
 config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
   // ui router
@@ -39,5 +39,4 @@ config(function ($stateProvider, $urlRouterProvider, CacheFactoryProvider) {
   
   // default route
   $urlRouterProvider.otherwise('/home'); 
-
 });
