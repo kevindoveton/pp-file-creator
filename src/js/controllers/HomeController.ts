@@ -150,26 +150,28 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
-  // page resize
-  angular.element($window).bind('resize', function() {
-    let container = {
-      width: $('.preview-container').width(),
-      height: $('.preview-container').height()
-    }
+  $(function() {
+    // page resize
+    $(window).bind('resize', function() {
+      let container = {
+        width: $('.preview-container').width(),
+        height: $('.preview-container').height()
+      }
+      
+      let preview = {
+        width: $('.preview').width(),
+        height: $('.preview').height()
+      }
+      
+      let scaleX = container.width / preview.width;
+      let scaleY = container.height / preview.height;
+      let scale = (scaleX > scaleY) ? scaleY : scaleX;
+      
+      $('.preview').css({zoom: scale});
+    });
     
-    let preview = {
-      width: $('.preview').width(),
-      height: $('.preview').height()
-    }
-    
-    let scaleX = container.width / preview.width;
-    let scaleY = container.height / preview.height;
-    
-    let scale = (scaleX > scaleY) ? scaleY : scaleX;
-    
-    $('.preview').css({zoom: scale});
-    
-  });
+    $(window).trigger('resize');
+  })
   
 });
 
