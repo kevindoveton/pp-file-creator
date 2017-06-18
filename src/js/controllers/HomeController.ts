@@ -13,7 +13,7 @@ function guid() {
 }
 
 
-angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, ModalService, HttpService, FileSaver, Blob) {
+angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $state, ModalService, HttpService, FileSaver, Blob) {
   
   $scope.sermon = {
     title: '',
@@ -43,6 +43,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       if (typeof(d.status) !== 'undefined' && d.status == 201) {
         // var data = new Blob([d.data], { type: 'text/xml;charset=utf-8' });
         // FileSaver.saveAs(data, 'file.pro5');
+        $state.go('files');
       } else {
         alert('failed');
       }
