@@ -13,7 +13,9 @@ function guid() {
 }
 
 
-angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $state, ModalService, HttpService, FileSaver, Blob) {
+angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob) {
+  
+  angular.element()
   
   $scope.sermon = {
     title: '',
@@ -148,7 +150,26 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
-  
+  // page resize
+  angular.element($window).bind('resize', function() {
+    let container = {
+      width: $('.preview-container').width(),
+      height: $('.preview-container').height()
+    }
+    
+    let preview = {
+      width: $('.preview').width(),
+      height: $('.preview').height()
+    }
+    
+    let scaleX = container.width / preview.width;
+    let scaleY = container.height / preview.height;
+    
+    let scale = (scaleX > scaleY) ? scaleY : scaleX;
+    
+    $('.preview').css({zoom: scale});
+    
+  });
   
 });
 

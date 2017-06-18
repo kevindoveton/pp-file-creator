@@ -41,7 +41,7 @@ div.container
         div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide.")
 
 
-    .col-md-3.hidden-sm-down(ng-show="slide.type !== 'BIBLE_SLIDE'")
+    .col-md-3.hidden-sm-down.preview-container(ng-show="slide.type !== 'BIBLE_SLIDE'")
       div.preview(ng-style="preview.container")
         .box(ng-style="preview.box")
           .inner.box(ng-style="preview.innerbox")
