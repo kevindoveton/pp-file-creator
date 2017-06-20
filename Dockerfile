@@ -9,7 +9,7 @@ ADD site_nginx.conf /etc/nginx/conf.d/default.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # add all the web files
-COPY static ./
+COPY build ./
 
 # expose ports
 EXPOSE 443/tcp 80/tcp
