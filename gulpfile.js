@@ -1,6 +1,6 @@
 "use strict";
 
-const API_URL = process.env.NODE_ENV == 'production' ? 'http://dev1.kdoveton.com:5000' : 'http://localhost:4000';
+const API_URL = process.env.NODE_ENV == 'production' ? '' : 'http://localhost:4000';
 
 const gulp = require('gulp');
 const path = require('path');
