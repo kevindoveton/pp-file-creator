@@ -122,7 +122,6 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
             $scope.slides = insertToArray($scope.slides, position+1, BIBLE_SLIDE());
             break;
         }
-        $(window).trigger('resize');
       });
     });
   };
@@ -182,7 +181,9 @@ function insertToArray(arr:Array<object>, position:number, item:object) {
   } else {
     arr.push(item);
   }
-  
+  setTimeout(() => {
+    $(window).trigger('resize');
+  }, 50);
   return arr;
 }
 
