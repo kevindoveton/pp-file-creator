@@ -34,6 +34,14 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
         'orderedlist',
         'unorderedlist',
       ]
+    },
+    paste: {
+      forcePlainText: false, //default true
+      cleanPastedHTML: true,
+      cleanReplacements: [],
+      cleanAttrs: ['class', 'style', 'dir'],
+      cleanTags: ['meta'],
+      unwrapTags: []
     }
   }
   
