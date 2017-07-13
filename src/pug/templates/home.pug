@@ -23,10 +23,10 @@ div.container
       //- bible verse picker - used for bible slides
       div(ng-show="slide.type == 'BIBLE_SLIDE'")
         .inputField.half.black
-          input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide.fullRef, $index)")
+          input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide, $index)")
           label.active Verse
         .inputField.half.black
-          select
+          select(ng-model="slide.ver")
             option NIV
             option MSG
             option NLT

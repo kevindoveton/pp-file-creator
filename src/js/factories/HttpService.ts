@@ -34,10 +34,11 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
 
   var dataCache = CacheFactory.get('dataCache');
   
-  function getUrlAndCache(url:string, cb?) {		
+  
+  function getUrlAndCache(url:string, force?:boolean) {
     var deferred = $q.defer(); // this has to be in here because its scoped
-    
-    if (dataCache.get(url)) {
+    console.log(!force);
+    if (!force && dataCache.get(url)) {
       deferred.resolve(dataCache.get(url));
     } else {
       $http({
@@ -49,7 +50,6 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       }).then(function (data) {
         dataCache.put(url, data);
         deferred.resolve(data);
-        if (typeof(cb) !== 'undefined') { cb(data) }
       }, function(error) {
         if (error.status == 401 && $state.current.name != 'login') { $state.go('login'); return; }
       });
@@ -57,6 +57,28 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     return deferred.promise;
   }
   
+  function deleteUrl(url) {
+    var deferred = $q.defer();
+    
+    $http({
+      method: 'DELETE',
+      url: url, 
+      headers: {
+        'Content-Type': 'application/json',
+      },				
+    }).then(function(data) {
+      deferred.resolve(data);
+    }, function(error) {
+      deferred.resolve(error);
+      if (error.status == 401 && $state.current.name != 'login') { 
+        $state.go('login'); 
+        return; 
+      }
+    });
+    
+    return deferred.promise;
+  }
+
   function postJson(url:string, data:object, cb?) {
     var deferred = $q.defer();
     
@@ -66,7 +88,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       data: data,
       headers: {
         'Content-Type': 'application/json',
-        'x-token': localStorageService.get('accessToken')
+        // 'x-token': localStorageService.get('accessToken')
       },				
     }).then(function(data) {
       deferred.resolve(data);
@@ -91,15 +113,19 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     },
     
     GetDocuments: function(d) {
-      return getUrlAndCache(BASE_URL+'/files/', d);
+      return getUrlAndCache(BASE_URL+'/files/');
     },
     
-    GetTemplates: function() {
-      return getUrlAndCache(BASE_URL+'/templates/');
+    GetTemplates: function(force?: boolean) {
+      return getUrlAndCache(BASE_URL+'/templates/', force);
     },
     
     GetTemplate: function(d) {
       return getUrlAndCache(BASE_URL+'/templates/'+d);
+    },
+    
+    RemoveTemplate: function(id) {
+      return deleteUrl(BASE_URL+'/templates/'+id);
     },
     
     GetVerse: function(data: any, d) {
@@ -109,7 +135,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       
       return getUrlAndCache(baseUrl + ver + ref);
     },
-    
+
+
     // ------------------------
     // login
     // TODO: implement this server side

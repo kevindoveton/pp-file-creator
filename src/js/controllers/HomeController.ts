@@ -13,9 +13,8 @@ function guid() {
 }
 
 
-angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob) {
+angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService) {
   
-  angular.element()
   
   $scope.sermon = {
     title: '',
@@ -45,7 +44,15 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
-  $scope.slides = [TEXT_SLIDE()];
+  
+  // get slides from storage, or create some new ones
+  if (localStorageService.get('slides') != null) {
+    $scope.sermon = localStorageService.get('slides');
+    $scope.slides = $scope.sermon.slides;
+  } else {
+    $scope.slides = [TEXT_SLIDE()];
+  }
+  
   
   $scope.submit = function() {
     $scope.sermon.slides = $scope.slides;
@@ -60,11 +67,12 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     });
   }
   
-  $scope.getVerse = function(ref, index) {
-    // const slide = $scope.slides[index]
+  $scope.getVerse = function(slide, index) {
+    var ref = slide.fullRef;
+    var ver = slide.ver;
     let bibleData = {
       ref: ref,
-      ver: 'NLT'
+      ver: ver
     };
     
     let pos = index;
@@ -162,6 +170,19 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       'align-items': 'center', // flex-start, center, flex-end
       'justify-content': 'center' // flex-start, center, flex-end
     }
+  }
+  
+  $scope.$on('$stateChangeStart', function( event ) {
+    saveSlides();
+  });
+  
+  $window.onbeforeunload = function(evt) {
+    saveSlides();
+  }
+  
+  function saveSlides() {
+    $scope.sermon.slides = $scope.slides;
+    localStorageService.set('slides', $scope.sermon)
   }
   
   $(function() {
