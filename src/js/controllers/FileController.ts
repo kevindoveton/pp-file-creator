@@ -1,7 +1,8 @@
 angular.module('ppfilecreator.controllers').controller('FileCtrl', function($scope, ModalService, HttpService, FileSaver, Blob) {
   $scope.presentations = [];
-  HttpService.GetDocuments(function(success) {
+  HttpService.GetDocuments().then(function(success) {
     $scope.presentations = success.data
+    console.log(success.data);
   });
   
   $scope.download = function(index) {

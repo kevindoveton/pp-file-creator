@@ -62,6 +62,11 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   
   $scope.getVerse = function(ref, index) {
     // const slide = $scope.slides[index]
+    let bibleData = {
+      ref: ref,
+      ver: 'NLT'
+    };
+    
     let pos = index;
     let parent = $scope.slides[index];
 
@@ -76,7 +81,8 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     if (parseInt(ref.match(/\d+/)[0]) == NaN) {
       return;
     }
-    HttpService.GetVerse(ref).then((success) => {
+    
+    HttpService.GetVerse(bibleData).then((success) => {
       const d = success.data;
       let verse = '';
       for (var i = 0; i < d.length; i++) {

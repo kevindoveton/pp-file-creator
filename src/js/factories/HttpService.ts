@@ -98,8 +98,16 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       return getUrlAndCache(BASE_URL+'/templates/');
     },
     
-    GetVerse: function(d) {
-      return getUrlAndCache('https://familycentre.org.au/cfcapp/search/?json=true&v=NLT&ref='+encodeURI(d));
+    GetTemplate: function(d) {
+      return getUrlAndCache(BASE_URL+'/templates/'+d);
+    },
+    
+    GetVerse: function(data: any, d) {
+      let baseUrl = 'https://familycentre.org.au/cfcapp/search/?json=true';
+      let ver = '&v='+data['ver'];
+      let ref = '&ref='+encodeURI(data['ref']);
+      
+      return getUrlAndCache(baseUrl + ver + ref);
     },
     
     // ------------------------
