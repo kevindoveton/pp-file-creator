@@ -1,20 +1,24 @@
+- var AppName = 'EasyPro'
+
 html(ng-app="ppfilecreator")
   head
     meta(charset='utf8')
     meta(name="viewport" content="width=device-width, initial-scale=1")
     base(href='/')
-    title PP File Creator 
+    title= AppName
     link(rel="stylesheet" type="text/css" href="/css/styles.css")
     link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700")
 
 
   body(ng-controller='AppCtrl')
-    div.title.noPrint(ng-show="showHeader")
-      h2 Intriguing Name
-    div.bodyContent
+    div.title(ng-show="showHeader")
+      div.bg-primary.no-print
+        h2= AppName
+      span.bg-primary-light.no-print
+    div.bodyContent.bg-primary-dark
       block body
 
-    div.footer.noPrint(ng-show="showFooter")
+    div.footer.no-print(ng-show="showFooter")
       div.navigation
         ul
           li

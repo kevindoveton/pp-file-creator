@@ -1,8 +1,11 @@
+- // TODO: get this from an api or something
+- var SupportedTranslations = ['NIV', 'MSG', 'NLT']
+
 div.container
   .row
     .col-xs-12
       div.header
-        h1 Make some slides!
+        h1 Your Presentations
     
   .row
     .col-sm-6
@@ -27,9 +30,8 @@ div.container
           label.active Verse
         .inputField.half.black
           select(ng-model="slide.ver")
-            option NIV
-            option MSG
-            option NLT
+            each translation in SupportedTranslations
+              option= translation
           label.active Translation
 
       //- image picker - used for image slide

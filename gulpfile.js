@@ -160,9 +160,10 @@ gulp.task('watch', function() {
 
 gulp.task('browser-sync', ['sass', 'pug', 'js'], function() {
   browserSync({
-    server: {
-      baseDir: paths.base_dist
-    },
+    // server: {
+    //   baseDir: paths.base_dist
+    // },
+    proxy: 'localhost:3050',
     notify: true
   });
 });
