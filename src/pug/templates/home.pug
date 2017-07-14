@@ -21,7 +21,7 @@ div.container
     .col-xs-12.submit
       button(ng-click="addSlide()") Create your first slide!
 
-  .row(ng-repeat="slide in slides")
+  .row(ng-repeat="slide in slides").bg-primary-light.slide
     .col-md-8
       //- bible verse picker - used for bible slides
       div(ng-show="slide.type == 'BIBLE_SLIDE'")

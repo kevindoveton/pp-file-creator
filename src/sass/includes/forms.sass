@@ -23,7 +23,7 @@
     box-shadow: none
     box-sizing: content-box
     transition: all 0.3s
-    color: white
+    color: $primary-text-color
     
   label
     color: #9e9e9e
@@ -50,16 +50,6 @@
     height: 4rem
     margin-top: 1rem
     line-height: 1.5em
-
-.black
-  input, textarea
-    color: $primary-text-color
-    
-.white
-  .autocomplete
-    color: black
-  input, textarea, select, option
-    color: white !important
     
 .warn
   input, textarea, select, option
@@ -107,33 +97,9 @@ label.black
     border-right: 3px solid black
     &::before
       border-bottom: 3px solid black
-#orderForm
-  .inputField
-    display: inline-block
-    margin: .5em
-    
-  .itemName
-    width: 50%
-  .quantity
-    width: 30%
-button.remove
-  margin: .5em
-  display: inline-block
-  width: 50px
-  height: 50px
-  
-div.customer
-  .inputField
-    display: inline-block
-    width: 90%
 
-  button
-    margin: .5em
-    display: inline-block
-    width: 50px
-    height: 50px
-    
 select
+  color: $primary-text-color
   height: 3rem
   width: 100%
   font-size: 1rem
@@ -144,5 +110,3 @@ select
   appearance: none
   background-color: inherit
   border-bottom: 1px solid $divider-color
-  // background: white url('/img/select-button.png') no-repeat 100%
-  // background-position: right
