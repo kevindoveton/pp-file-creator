@@ -1,3 +1,9 @@
+/**
+ * local storage is real annoying
+ * use this to disable it
+*/
+const DISABLE_LOCAL_STORAGE = false;
+
 const TEXT_SLIDE = function() { return { id: guid(), htmlContent: '', type: 'TEXT_SLIDE' } };
 const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', children: [], type: 'BIBLE_SLIDE' } };
 const IMAGE_SLIDE = function() { return { id: guid(), path: '', type: 'IMAGE_SLIDE' } };
@@ -12,14 +18,18 @@ function guid() {
     s4() + '-' + s4() + s4() + s4();
 }
 
+if (DISABLE_LOCAL_STORAGE) {
+  console.warn('DISABLE_LOCAL_STORAGE SET')
+}
 
 angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService) {
   
   
   $scope.sermon = {
     title: '',
-    date: '',
-    slides: []
+    date: new Date(),
+    slides: [TEXT_SLIDE()],
+    template: undefined
   }
   
   $scope.toolbar = {
@@ -28,7 +38,6 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
         'bold', 
         'italic', 
         'underline',
-        'h1',
         'superscript',
         'orderedlist',
         'unorderedlist',
@@ -47,15 +56,12 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   
   // get slides from storage, or create some new ones
   if (localStorageService.get('slides') != null) {
-    $scope.sermon = localStorageService.get('slides');
-    $scope.slides = $scope.sermon.slides;
-  } else {
-    $scope.slides = [TEXT_SLIDE()];
+    loadSlides();
   }
   
   
   $scope.submit = function() {
-    $scope.sermon.slides = $scope.slides;
+    $scope.sermon.slides = $scope.sermon.slides;
     HttpService.CreateNewDocument($scope.sermon).then(function(d) {
       if (typeof(d.status) !== 'undefined' && d.status == 201) {
         // var data = new Blob([d.data], { type: 'text/xml;charset=utf-8' });
@@ -76,12 +82,12 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     };
     
     let pos = index;
-    let parent = $scope.slides[index];
+    let parent = $scope.sermon.slides[index];
 
     for (var i = 0; i < parent.children.length; i++) {
-      for (var j = 0; j < $scope.slides.length; j++) {
-        if ($scope.slides[j].id == parent.children[i]) {
-          removeFromArray($scope.slides, j);
+      for (var j = 0; j < $scope.sermon.slides.length; j++) {
+        if ($scope.sermon.slides[j].id == parent.children[i]) {
+          removeFromArray($scope.sermon.slides, j);
         }
       }
     }
@@ -95,12 +101,12 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       let verse = '';
       for (var i = 0; i < d.length; i++) {
         if (verse != d[i].verse) {
-          $scope.slides = insertToArray($scope.slides, pos+1, TEXT_SLIDE());
-          parent.children.push($scope.slides[pos+1].id);
+          $scope.sermon.slides = insertToArray($scope.sermon.slides, pos+1, TEXT_SLIDE());
+          parent.children.push($scope.sermon.slides[pos+1].id);
           pos++;
         }
         
-        var slide = $scope.slides[pos];
+        var slide = $scope.sermon.slides[pos];
         slide.htmlContent += '<p>';
         if (verse != d[i].verse) {
           slide.htmlContent += '<sup>'+d[i].verse+'</sup>';
@@ -113,18 +119,18 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   
   $scope.removeSlide = function(position:number) {
     // if the slide has children, remove them first
-    if (typeof($scope.slides[position].children) !== 'undefined') {
-      let parent = $scope.slides[position];
+    if (typeof($scope.sermon.slides[position].children) !== 'undefined') {
+      let parent = $scope.sermon.slides[position];
       for (var i = 0; i < parent.children.length; i++) {
-        for (var j = 0; j < $scope.slides.length; j++) {
-          if ($scope.slides[j].id == parent.children[i]) {
-            $scope.slides = removeFromArray($scope.slides, j);
+        for (var j = 0; j < $scope.sermon.slides.length; j++) {
+          if ($scope.sermon.slides[j].id == parent.children[i]) {
+            $scope.sermon.slides = removeFromArray($scope.sermon.slides, j);
           }
         }
       }
     }
     // remove the slide
-    $scope.slides = removeFromArray($scope.slides, position)
+    $scope.sermon.slides = removeFromArray($scope.sermon.slides, position)
   }
   
   $scope.addSlide = function(position) {
@@ -135,13 +141,13 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       modal.close.then(function(result) {
         switch (result) {
           case 'TEXT':
-            $scope.slides = insertToArray($scope.slides, position+1, TEXT_SLIDE());
+            $scope.sermon.slides = insertToArray($scope.sermon.slides, position+1, TEXT_SLIDE());
             break;
           case 'IMAGE':
-            $scope.slides = insertToArray($scope.slides, position+1, IMAGE_SLIDE());
+            $scope.sermon.slides = insertToArray($scope.sermon.slides, position+1, IMAGE_SLIDE());
             break;
           case 'BIBLE':
-            $scope.slides = insertToArray($scope.slides, position+1, BIBLE_SLIDE());
+            $scope.sermon.slides = insertToArray($scope.sermon.slides, position+1, BIBLE_SLIDE());
             break;
         }
       });
@@ -149,32 +155,33 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   };
   
   // TODO: get this dynamically
-  $scope.preview = {
-    container: {
-      background: '#000',
-      width: '1920px',
-      height: '1080px'
-    },
-    
-    box: {
-      top: '462.08px',
-      left: '61.22px',
-      width: '1797.547px',
-      height: '803.8289px'
-    },
-    
-    innerbox: {
-      'font-family': 'Helvetica',
-      'font-size': '96px',
-      'text-align': 'center', // left, center, right
-      'align-items': 'center', // flex-start, center, flex-end
-      'justify-content': 'center' // flex-start, center, flex-end
-    }
-  }
+  // $scope.preview = {
+  //   container: {
+  //     background: '#000',
+  //     width: '1920px',
+  //     height: '1080px'
+  //   },
+  //   
+  //   box: {
+  //     top: '462.08px',
+  //     left: '61.22px',
+  //     width: '1797.547px',
+  //     height: '803.8289px'
+  //   },
+  //   
+  //   innerbox: {
+  //     'font-family': 'Helvetica',
+  //     'font-size': '96px',
+  //     'text-align': 'center', // left, center, right
+  //     'align-items': 'center', // flex-start, center, flex-end
+  //     'justify-content': 'center' // flex-start, center, flex-end
+  //   }
+  // }
   HttpService.GetTemplates().then(function(d) {
     console.log(d.data);
     if (d.data) {
       $scope.preview = d.data[0].preview;
+      $scope.templates = d.data;
     }
   });
   
@@ -186,8 +193,35 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     saveSlides();
   }
   
+  function loadSlides() {
+    if (DISABLE_LOCAL_STORAGE) {
+      return false;
+    }
+    
+    var sermon = localStorageService.get('slides');
+    $scope.sermon = sermon;
+    $scope.sermon.date = new Date(sermon.date);
+    $scope.sermon.slides = $scope.sermon.slides;
+    
+    if (typeof($scope.sermon.date) == 'undefined') {
+      $scope.sermon.date = new Date();
+    }
+    if (typeof($scope.sermon.title) == 'undefined') {
+      $scope.sermon.title = '';
+    }
+    if (typeof($scope.sermon.slides) == 'undefined') {
+      $scope.sermon.slides = [TEXT_SLIDE()];
+    }
+    if (typeof($scope.sermon.template) == 'undefined') {
+      $scope.sermon.template = 'Default';
+    }
+  }
+  
   function saveSlides() {
-    $scope.sermon.slides = $scope.slides;
+    if (DISABLE_LOCAL_STORAGE) {
+      return false;
+    }
+    $scope.sermon.slides = $scope.sermon.slides;
     localStorageService.set('slides', $scope.sermon)
   }
   

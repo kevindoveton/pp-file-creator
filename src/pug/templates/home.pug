@@ -16,12 +16,17 @@ div.container
       .inputField.black
         input(type="date" ng-model="sermon.date")
         label.active Date
+    .col-sm-6
+      .inputField
+        select(ng-model="sermon.template" ng-options="template.title for template in templates track by template._id")
+        label.active Template
 
-  .row(ng-show="slides.length == 0")
+
+  .row(ng-show="sermon.slides.length == 0")
     .col-xs-12.submit
       button(ng-click="addSlide()") Create your first slide!
 
-  .row(ng-repeat="slide in slides").bg-primary-light.slide
+  .row(ng-repeat="slide in sermon.slides").bg-primary-light.slide
     .col-md-8
       //- bible verse picker - used for bible slides
       div(ng-show="slide.type == 'BIBLE_SLIDE'")
@@ -44,14 +49,14 @@ div.container
 
 
     .col-md-3.hidden-sm-down.preview-container(ng-show="slide.type !== 'BIBLE_SLIDE'")
-      div.preview(ng-style="preview.container")
-        .box(ng-style="preview.box")
-          .inner.box(ng-style="preview.innerbox")
+      div.preview(ng-style="sermon.template.preview.container")
+        .box(ng-style="sermon.template.preview.box")
+          .inner.box(ng-style="sermon.template.preview.innerbox")
             .content(ng-bind-html="slide.htmlContent")
     .col-md-1
       button(style="width: 100%;" ng-click="addSlide($index)") +
       button(style="width: 100%;" ng-click="removeSlide($index)") -
 
   .row
-    .col-xs-12.submit(ng-show="slides.length > 0")
+    .col-xs-12.submit(ng-show="sermon.slides.length > 0")
       button(ng-click="submit()") Submit
