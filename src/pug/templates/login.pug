@@ -1,0 +1,13 @@
+div.login
+  h2 EasyPro
+  
+  div.login-box
+    h1 Login
+    .inputField
+      input(type="text" ng-model="user.username")
+      label(ng-class="{active: user.username}") Username
+    .inputField
+      input(type="password" ng-model="user.password")
+      label(ng-class="{active: user.password}") Password
+    .inputField
+      button(ng-click="user.submit(user)") Submit

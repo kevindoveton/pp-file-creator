@@ -19,6 +19,12 @@ angular.module('ppfilecreator', [
 config(function ($stateProvider, $urlRouterProvider, $locationProvider, CacheFactoryProvider, localStorageServiceProvider) {
   // ui router
   // register states
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: '/templates/login.html',
+    controller: 'LoginCtrl'
+  });
+  
   $stateProvider.state('home', {
     url: '/home',
     templateUrl: '/templates/home.html',

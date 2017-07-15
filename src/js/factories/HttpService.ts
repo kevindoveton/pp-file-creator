@@ -142,13 +142,14 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     // TODO: implement this server side
     // ------------------------
     login: function(data) {
-      return postJson(BASE_URL+'/auth/login', data, function(d) {
-        if (d.data.loginStatus == true) {
+      return postJson(BASE_URL+'/auth', data, function(d) {
+        if (d.data.success == true) {
           // TODO: user storage.. find a better way of reauthorising
           // localStorageService.set('user', data);
           localStorageService.set('accessToken', d.data.token)
         }
       });
     }
-  };
-});
+    
+  }; // end return
+}); // end angular module
