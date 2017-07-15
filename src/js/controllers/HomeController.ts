@@ -60,7 +60,11 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   });
   
-  // get slides from storage, or create some new ones
+  /**
+   * load slides from local storage on page load
+   * @requires localStorageService 
+   * https://github.com/grevory/angular-local-storage
+  */
   if (localStorageService.get('slides') != null) {
     if (!DISABLE_LOCAL_STORAGE) {
       return loadSlides();
@@ -162,18 +166,29 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     });
   };
 
+  /**
+   * save slides to local storage on page change
+  */
   $scope.$on('$stateChangeStart', function( event ) {
     if (!DISABLE_LOCAL_STORAGE) {
       return saveSlides();
     }
   });
   
+  /**
+   * save slides to local storage on browser exit
+  */
   $window.onbeforeunload = function(evt) {
     if (!DISABLE_LOCAL_STORAGE) {
       return saveSlides();
     }
   }
   
+  /**
+   * load slides from local storage
+   * @requires localStorageService 
+   * https://github.com/grevory/angular-local-storage
+  */
   function loadSlides() {
     var sermon = localStorageService.get('slides');
     $scope.sermon = sermon;
@@ -194,6 +209,11 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
+  /** 
+   * save the slides to local storage
+   * @requires localStorageService 
+   * https://github.com/grevory/angular-local-storage
+  */
   function saveSlides() {
     if (DISABLE_LOCAL_STORAGE) {
       return false;
@@ -202,6 +222,10 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     localStorageService.set('slides', $scope.sermon)
   }
   
+  /**
+   * bind the resize function to window.resize
+   * @requires jQuery
+  */
   $(function() {
     // page resize
     $(window).bind('resize', function() {
@@ -227,6 +251,14 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   
 });
 
+
+/**
+ * insert a slide into an array
+ * @param arr {Array} - the array
+ * @param position {Number} - the position to be inserted to
+ * @param item {Object} - the item to be inserted into the array
+ * @returns {Array} - the new array
+*/
 function insertToArray(arr:Array<object>, position:number, item:object) {
   if (typeof(position) !== 'undefined') {
     arr.splice(position, 0, item);
@@ -239,6 +271,12 @@ function insertToArray(arr:Array<object>, position:number, item:object) {
   return arr;
 }
 
+/**
+ * remove a slide from the array
+ * @param arr {Array} - the array to be removed from
+ * @param position {Number} - the item to remove
+ * @returns {Array} the new array
+*/
 function removeFromArray(arr:Array<object>, position:number) {
   arr.splice(position, 1);
   return arr;

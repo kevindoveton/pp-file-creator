@@ -14,9 +14,9 @@ angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function (
       // show this normally
       toggleHeaderFooter(true, $scope);
     }
-		$scope.loading = true;
-	})
-	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
-		$scope.loading = false;
-	});
+    $scope.loading = true;
+  })
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
+    $scope.loading = false;
+  });
 });

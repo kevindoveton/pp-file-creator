@@ -12,11 +12,14 @@ button
   box-shadow: 3px 3px 15px #999
   cursor: pointer
   outline: none
-  
+  transition: .5s all
+button:hover
+  background-color: darken($accent-color, 15)
+
 .inline
   display: inline-block
   margin: 1em
-  
+
 div.inlineButtonContainer
   button
     display: inline-block
