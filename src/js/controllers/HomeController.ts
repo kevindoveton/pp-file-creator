@@ -2,11 +2,11 @@
  * local storage is real annoying
  * use this to disable it
 */
-const DISABLE_LOCAL_STORAGE = false;
+const DISABLE_LOCAL_STORAGE = true;
 
 const TEXT_SLIDE = function() { return { id: guid(), htmlContent: '', type: 'TEXT_SLIDE' } };
 const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', children: [], type: 'BIBLE_SLIDE' } };
-const IMAGE_SLIDE = function() { return { id: guid(), path: '', type: 'IMAGE_SLIDE' } };
+const IMAGE_SLIDE = function() { return { id: guid(), path: '', htmlContent: '', type: 'IMAGE_SLIDE' } };
 
 function guid() {
   function s4() {
@@ -28,7 +28,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   $scope.sermon = {
     title: '',
     date: new Date(),
-    slides: [TEXT_SLIDE()],
+    slides: [IMAGE_SLIDE()],
     template: undefined
   }
   

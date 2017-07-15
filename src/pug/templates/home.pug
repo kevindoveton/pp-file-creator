@@ -41,7 +41,7 @@ div.container
 
       //- image picker - used for image slide
       div(ng-show="slide.type == 'IMAGE_SLIDE'")
-        input(type="file")
+        input(type="file" custom-on-change="updatePreviewImage" change-data="slide")
 
       //- editor - show for all but image slide
       div.editor(ng-show="slide.type == 'TEXT_SLIDE'")
