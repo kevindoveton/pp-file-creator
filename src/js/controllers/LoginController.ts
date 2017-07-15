@@ -9,7 +9,11 @@ angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($sc
     // TODO: check the data is good
     HttpService.login(data).then((d) => {
       console.log(d);
-      $state.go('home');
+      if (typeof(d.data.success) != 'undefined' && d.data.success == true) {
+        $state.go('home');
+      } else {
+        alert(d.data.message);
+      }
     });
   }
   
