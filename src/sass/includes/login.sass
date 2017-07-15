@@ -1,29 +1,27 @@
 @import variables
 
-#login
-  background-color: $primary-color-dark
+.login
+  display: flex
   width: 100%
   height: 100%
-  display: flex
   justify-content: center
   align-items: center
-  
-  button.login
-    box-shadow: none
-  
-  div.loginBox
-    // height: 300px
-    width: 600px
-    max-width: 80%
-    background-color: rgba(#222, 0.9)
-    border-radius: 1em
-    border: 2px solid rgba($divider-color, 0.05)
+  flex-direction: column
 
-  p.error
-    display: none
-    color: red
-  p.showError
-    display: block !important
+  button.facebook
+    position: absolute
+    bottom: 1em
+    right: 1em
 
-  div.inputField
-    margin: 1em
+  h2
+    position: absolute
+    top: 1em
+    left: 1em
+    width: 100%
+
+  .login-box
+    width: 50%
+    background-color: $primary-color
+    border-radius: .5em
+    height: 50%
+    padding: 1em

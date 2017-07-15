@@ -34,7 +34,8 @@
     cursor: text
     transition: .2s ease-out
     
-  input:focus + label, textarea:focus + label
+  input:focus + label, 
+  textarea:focus + label
     // color: #26a69a
     color: $accent-color
     font-size: .8rem
@@ -50,7 +51,33 @@
     height: 4rem
     margin-top: 1rem
     line-height: 1.5em
+  
+  input:focus ~ span.input-decorator, 
+  textarea:focus ~ span.input-decorator
+    &::before,
+    &::after
+      width: 50%
     
+  span.input-decorator
+    &.expand::before,
+    &.expand::after
+      width: 50%
+
+    &::before,
+    &::after
+      position: absolute
+      bottom: 20px
+      width: 0
+      border-bottom: 1px solid $accent-color
+      content: ''
+      transition: .5s all
+
+    &::before
+      left: 50%
+
+    &::after
+      right: 50%
+
 .warn
   input, textarea, select, option
     border-bottom-color: red !important

@@ -35,9 +35,25 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
   var dataCache = CacheFactory.get('dataCache');
   
   
+  function getUrl(url: string) {
+    var deferred = $q.defer();
+    $http({
+        method: 'GET',
+        url: url,
+        headers: {
+          // 'x-token': localStorageService.get('accessToken')
+        }
+    }).then(function (data) {
+      deferred.resolve(data);
+    }, function(error) {
+      return error;
+    });
+    
+    return deferred.promise;
+  }
+  
   function getUrlAndCache(url:string, force?:boolean) {
     var deferred = $q.defer(); // this has to be in here because its scoped
-    console.log(!force);
     if (!force && dataCache.get(url)) {
       deferred.resolve(dataCache.get(url));
     } else {
@@ -150,6 +166,10 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
         }
       });
     }
+    
+    // LoginFacebook: function() {
+      // return getUrl(BASE_URL+'/auth/facebook');
+    // }
     
   }; // end return
 }); // end angular module
