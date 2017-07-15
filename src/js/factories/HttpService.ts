@@ -5,9 +5,9 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
   
   if (!CacheFactory.get('dataCache')) {3
     CacheFactory.createCache('dataCache', {
-      maxAge: .3 * 60 * 1000,
+      maxAge: 1 * 60 * 1000,
       deleteOnExpire: 'aggressive',
-      recycleFreq: .15 * 60 * 1000, // half of max age
+      recycleFreq: .5 * 60 * 1000, // half of max age
       // on expire refresh items
       onExpire: function (key, value) { 
         var _this = this; // "this" is the cache in which the item expired

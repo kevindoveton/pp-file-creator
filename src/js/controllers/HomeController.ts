@@ -171,6 +171,12 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       'justify-content': 'center' // flex-start, center, flex-end
     }
   }
+  HttpService.GetTemplates().then(function(d) {
+    console.log(d.data);
+    if (d.data) {
+      $scope.preview = d.data[0].preview;
+    }
+  });
   
   $scope.$on('$stateChangeStart', function( event ) {
     saveSlides();
