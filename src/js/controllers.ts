@@ -10,13 +10,13 @@ angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function (
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     if (toState.name == 'login') {
       toggleHeaderFooter(false, $scope);
+    } else {
+      // show this normally
+      toggleHeaderFooter(true, $scope);
     }
 		$scope.loading = true;
 	})
 	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
 		$scope.loading = false;
 	});
-
-  // show this normally
-  toggleHeaderFooter(true, $scope);
 });

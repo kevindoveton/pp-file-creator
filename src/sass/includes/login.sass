@@ -10,8 +10,9 @@
 
   button.facebook
     position: absolute
-    bottom: 1em
-    right: 1em
+    bottom: 2em
+    right: 2em
+    margin: 0
 
   h2
     position: absolute
@@ -21,7 +22,10 @@
 
   .login-box
     width: 50%
+    max-width: 600px
     background-color: $primary-color
     border-radius: .5em
-    height: 50%
     padding: 1em
+    
+    +mobile
+      width: calc(100% - 2em)

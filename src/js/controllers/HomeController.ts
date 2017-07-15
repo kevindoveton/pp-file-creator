@@ -53,10 +53,18 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
   
+  HttpService.GetTemplates().then(function(d) {
+    if (d.data) {
+      $scope.preview = d.data[0].preview;
+      $scope.templates = d.data;
+    }
+  });
   
   // get slides from storage, or create some new ones
   if (localStorageService.get('slides') != null) {
-    loadSlides();
+    if (!DISABLE_LOCAL_STORAGE) {
+      return loadSlides();
+    }
   }
   
   
@@ -64,10 +72,10 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     $scope.sermon.slides = $scope.sermon.slides;
     HttpService.CreateNewDocument($scope.sermon).then(function(d) {
       if (typeof(d.status) !== 'undefined' && d.status == 201) {
-        // var data = new Blob([d.data], { type: 'text/xml;charset=utf-8' });
-        // FileSaver.saveAs(data, 'file.pro5');
+        HttpService.GetDocuments(true);
         $state.go('files');
       } else {
+        console.error(d);
         alert('failed');
       }
     });
@@ -153,51 +161,20 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       });
     });
   };
-  
-  // TODO: get this dynamically
-  // $scope.preview = {
-  //   container: {
-  //     background: '#000',
-  //     width: '1920px',
-  //     height: '1080px'
-  //   },
-  //   
-  //   box: {
-  //     top: '462.08px',
-  //     left: '61.22px',
-  //     width: '1797.547px',
-  //     height: '803.8289px'
-  //   },
-  //   
-  //   innerbox: {
-  //     'font-family': 'Helvetica',
-  //     'font-size': '96px',
-  //     'text-align': 'center', // left, center, right
-  //     'align-items': 'center', // flex-start, center, flex-end
-  //     'justify-content': 'center' // flex-start, center, flex-end
-  //   }
-  // }
-  HttpService.GetTemplates().then(function(d) {
-    console.log(d.data);
-    if (d.data) {
-      $scope.preview = d.data[0].preview;
-      $scope.templates = d.data;
-    }
-  });
-  
+
   $scope.$on('$stateChangeStart', function( event ) {
-    saveSlides();
+    if (!DISABLE_LOCAL_STORAGE) {
+      return saveSlides();
+    }
   });
   
   $window.onbeforeunload = function(evt) {
-    saveSlides();
+    if (!DISABLE_LOCAL_STORAGE) {
+      return saveSlides();
+    }
   }
   
   function loadSlides() {
-    if (DISABLE_LOCAL_STORAGE) {
-      return false;
-    }
-    
     var sermon = localStorageService.get('slides');
     $scope.sermon = sermon;
     $scope.sermon.date = new Date(sermon.date);
