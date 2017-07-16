@@ -41,11 +41,11 @@ div.container
 
       //- image picker - used for image slide
       div(ng-show="slide.type == 'IMAGE_SLIDE'")
-        input(type="file" uploader="uploader" name="file" nv-file-select="" custom-on-change change-data="slide")
+        input(type="file" name="file" kd-file-upload kd-file-response="slide" custom-on-change change-data="slide")
 
       //- editor - show for all but image slide
       div.editor(ng-show="slide.type == 'TEXT_SLIDE'")
-        div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide.")
+        div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide." options="{slide: slide}")
 
 
     .col-md-3.hidden-sm-down.preview-container(ng-show="slide.type !== 'BIBLE_SLIDE'")
