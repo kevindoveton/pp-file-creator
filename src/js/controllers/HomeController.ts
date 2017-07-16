@@ -22,8 +22,15 @@ if (DISABLE_LOCAL_STORAGE) {
   console.warn('DISABLE_LOCAL_STORAGE SET')
 }
 
-angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService) {
+angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService, FileUploader) {
   
+  var uploader = $scope.uploader = new FileUploader({
+      url: '__API-URL__/api/v1/s3/',
+      autoUpload: true,
+      onCompleteItem: function(fileItem, response, status, headers) {
+          console.info('onCompleteItem', response);
+      }
+  });
   
   $scope.sermon = {
     title: '',
