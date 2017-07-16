@@ -1,17 +1,18 @@
 'use strict';
 /* Directives */
-angular.module('ppfilecreator.directives', []).directive('customOnChange', function() {
-  return {
-    restrict: 'A',
-    scope: {slide: '=changeData'},
-    link: function (scope, element, attrs) {
-      element.change(function(evt: any) {
-        scope.slide.htmlContent = '<img src="'+URL.createObjectURL(evt.target.files[0])+'"/>';
-        scope.$apply();
-      });
-    }
-  };
-});
+// angular.module('ppfilecreator.directives', []).directive('kdImageOnChange', function() {
+//   return {
+//     restrict: 'A',
+//     scope: {kdImageChangeData: '='},
+//     link: function (scope, element, attrs) {
+//       element.on('change', function(evt: any) {
+//         console.log(evt);
+//         scope.kdImageChangeData.htmlContent = '<img src="'+URL.createObjectURL(evt.target.files[0])+'"/>';
+//         scope.$apply();
+//       });
+//     }
+//   };
+// });
 
 angular.module('ppfilecreator.directives', []).directive('kdFileUpload', function() {
   return {
@@ -19,10 +20,10 @@ angular.module('ppfilecreator.directives', []).directive('kdFileUpload', functio
     scope: {kdFileResponse: '='},
     // bindToController: true,
     link: function ($scope, element, attrs) {
-      element.change(function(evt: any) {
-        console.log($scope);
+      element.on('change', function(evt: any) {
         $scope.uploadFile(evt.target.files[0], '__API-URL__/api/v1/s3').then(function(res) {
           $scope.kdFileResponse.path = res.data;
+          $scope.kdFileResponse.htmlContent = '<img src="'+URL.createObjectURL(evt.target.files[0])+'"/>';
         });
       });
     },
