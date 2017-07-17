@@ -1,6 +1,7 @@
 /*===========   API Service    ===========*/
 angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $http, $q, localStorageService, $state) {
   
+  const DEBUG = true;
   const BASE_URL = '__API-URL__/api/v1/';
   
   if (!CacheFactory.get('dataCache')) {3
@@ -64,6 +65,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
             // 'x-token': localStorageService.get('accessToken')
           }
       }).then(function (data) {
+        if (DEBUG) console.log(data);
         dataCache.put(url, data);
         deferred.resolve(data);
       }, function(error) {
@@ -108,6 +110,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       },				
     }).then(function(data) {
       deferred.resolve(data);
+      if (DEBUG) console.log(data);
       if (typeof(cb) !== 'undefined') { 
         CacheFactory.destroy();
         cb(data) 
