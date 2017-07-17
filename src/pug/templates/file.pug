@@ -5,7 +5,10 @@ div.container
   
   .row(ng-repeat="presentation in presentations")
     .col-md-3
-      div(style="width: 100%; height: 8em; background: #333")
+      div.preview(ng-style="presentation.template.preview.container")
+        .box(ng-style="presentation.template.preview.box")
+          .inner.box(ng-style="presentation.template.preview.innerbox")
+            .content(ng-bind-html="presentation.slides[0].htmlContent")
     .col-md-6
       div
         h2 {{presentation.title}}
