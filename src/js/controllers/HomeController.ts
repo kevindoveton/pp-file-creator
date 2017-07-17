@@ -6,7 +6,7 @@ const DISABLE_LOCAL_STORAGE = true;
 
 const TEXT_SLIDE = function() { return { id: guid(), htmlContent: '', type: 'TEXT_SLIDE' } };
 const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', children: [], type: 'BIBLE_SLIDE' } };
-const IMAGE_SLIDE = function() { return { id: guid(), path: '', htmlContent: '', type: 'IMAGE_SLIDE' } };
+const IMAGE_SLIDE = function() { return { id: guid(), image: '', htmlContent: '', type: 'IMAGE_SLIDE' } };
 
 function guid() {
   function s4() {

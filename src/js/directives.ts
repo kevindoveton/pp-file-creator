@@ -22,7 +22,7 @@ angular.module('ppfilecreator.directives', []).directive('kdFileUpload', functio
     link: function ($scope, element, attrs) {
       element.on('change', function(evt: any) {
         $scope.uploadFile(evt.target.files[0], '__API-URL__/api/v1/s3').then(function(res) {
-          $scope.kdFileResponse.path = res.data;
+          $scope.kdFileResponse.image = res.data;
           $scope.kdFileResponse.htmlContent = '<img src="'+URL.createObjectURL(evt.target.files[0])+'"/>';
         });
       });
