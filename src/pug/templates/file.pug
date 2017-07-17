@@ -11,4 +11,5 @@ div.container
         h2 {{presentation.title}}
         p {{presentation.date}}
     .col-md-3
-        button(ng-click="download($index)") Download
+        a(ng-click="download(presentation._id)")
+          button() Download

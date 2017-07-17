@@ -27,7 +27,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   $scope.sermon = {
     title: '',
     date: new Date(),
-    slides: [IMAGE_SLIDE()],
+    slides: [TEXT_SLIDE()],
     template: undefined
   }
   

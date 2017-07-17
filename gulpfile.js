@@ -134,6 +134,7 @@ gulp.task('pug', function(cb) {
     gulp.src([paths.pug + '**/*.pug', '!' + paths.pug +
       'includes/*.pug'
     ]),
+    replace('__API-URL__', API_URL),
     pug(),
     gulp.dest(paths.html_dist)
   ], function(e) {
