@@ -34,7 +34,7 @@ div.container
           input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide, $index)")
           label.active Verse
         .inputField.half.black
-          select(ng-model="slide.ver")
+          select(ng-model="slide.ver" ng-blur="getVerse(slide, $index)")
             each translation in SupportedTranslations
               option= translation
           label.active Translation

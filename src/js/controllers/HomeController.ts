@@ -5,7 +5,7 @@
 const DISABLE_LOCAL_STORAGE = true;
 
 const TEXT_SLIDE = function() { return { id: guid(), htmlContent: '', type: 'TEXT_SLIDE' } };
-const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, translation: '', children: [], type: 'BIBLE_SLIDE' } };
+const BIBLE_SLIDE = function() { return { id: guid(), fullRef: '', ref: { book: '', chapter: '', verse: '' }, ver: 'NIV', children: [], type: 'BIBLE_SLIDE' } };
 const IMAGE_SLIDE = function() { return { id: guid(), image: '', htmlContent: '', type: 'IMAGE_SLIDE' } };
 
 function guid() {
@@ -28,7 +28,8 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     title: '',
     date: new Date(),
     slides: [TEXT_SLIDE()],
-    template: undefined
+    template: undefined,
+    firstRun: true
   }
   
   $scope.toolbar = {
@@ -51,11 +52,15 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       unwrapTags: []
     }
   }
-  
+
   HttpService.GetTemplates().then(function(d) {
     if (d.data) {
       $scope.preview = d.data[0].preview;
       $scope.templates = d.data;
+      
+      if ($scope.sermon.firstRun) {
+        $scope.sermon.template = $scope.templates[0]
+      }
     }
   });
   
@@ -69,8 +74,8 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       return loadSlides();
     }
   }
-  
-  
+
+
   $scope.submit = function() {
     $scope.sermon.slides = $scope.sermon.slides;
     HttpService.CreateNewDocument($scope.sermon).then(function(d) {
@@ -83,7 +88,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       }
     });
   }
-  
+
   $scope.getVerse = function(slide, index) {
     var ref = slide.fullRef;
     var ver = slide.ver;
@@ -102,11 +107,11 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
         }
       }
     }
-    
+
     if (parseInt(ref.match(/\d+/)[0]) == NaN) {
       return;
     }
-    
+
     HttpService.GetVerse(bibleData).then((success) => {
       const d = success.data;
       let verse = '';
@@ -127,7 +132,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       }
     });
   }
-  
+
   $scope.removeSlide = function(position:number) {
     // if the slide has children, remove them first
     if (typeof($scope.sermon.slides[position].children) !== 'undefined') {
@@ -143,7 +148,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     // remove the slide
     $scope.sermon.slides = removeFromArray($scope.sermon.slides, position)
   }
-  
+
   $scope.addSlide = function(position) {
     console.log($scope.sermon.slides[0]);
     ModalService.showModal({
@@ -174,7 +179,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       return saveSlides();
     }
   });
-  
+
   /**
    * save slides to local storage on browser exit
   */
@@ -183,7 +188,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       return saveSlides();
     }
   }
-  
+
   /**
    * load slides from local storage
    * @requires localStorageService 
@@ -208,7 +213,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       $scope.sermon.template = 'Default';
     }
   }
-  
+
   /** 
    * save the slides to local storage
    * @requires localStorageService 
@@ -218,10 +223,11 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     if (DISABLE_LOCAL_STORAGE) {
       return false;
     }
+    $scope.sermon.firstRun = false;
     $scope.sermon.slides = $scope.sermon.slides;
     localStorageService.set('slides', $scope.sermon)
   }
-  
+
   /**
    * bind the resize function to window.resize
    * @requires jQuery
