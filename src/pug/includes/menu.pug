@@ -1,0 +1,8 @@
+- var pages = [{name: 'Home', link: 'home'}, {name: 'Templates', link: 'templates'}, {name: 'Files', link: 'files'}]
+
+div.navigation(ng-show="showMenu")
+  ul
+    each page in pages
+      li(ui-sref-active="selected")
+        a(ui-sref=page.link ng-click="toggleMenu(false)")
+          p= page.name

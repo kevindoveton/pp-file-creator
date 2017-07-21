@@ -7,6 +7,8 @@ function toggleHeaderFooter(state: boolean, $scope: any) {
 /* Controllers */
 angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function ($scope, $rootScope, $http, $templateCache, $state, localStorageService) {
 
+  $scope.showMenu = false;
+
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     if (toState.name == 'login') {
       toggleHeaderFooter(false, $scope);
@@ -19,4 +21,9 @@ angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function (
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
     $scope.loading = false;
   });
+  
+  $scope.toggleMenu = function() {
+    $scope.showMenu = !$scope.showMenu;
+  }
+  
 });
