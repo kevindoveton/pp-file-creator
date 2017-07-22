@@ -6,6 +6,7 @@ angular.module('ppfilecreator', [
   'ppfilecreator.filters',
   'ppfilecreator.services',
   'ppfilecreator.directives',
+  'kdLoader',
   'ngAnimate',
   'ngSanitize',
   'angularModalService',

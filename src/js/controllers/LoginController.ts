@@ -1,10 +1,11 @@
-angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($scope, $state, ModalService, HttpService, localStorageService) {
+angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($scope, $state, $rootScope, ModalService, HttpService, localStorageService, kdLoader) {
   $scope.user = {
     username: '',
     password: '',
     submit: login,
     facebook: facebookLogin
   }
+  
   
   /**
    * login using facebook
@@ -22,9 +23,10 @@ angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($sc
    * @returns {Null}
   */
   function login(data: object) {
-    // TODO: check the data is good
+    // // TODO: check the data is good
+    kdLoader.toggleLoading(true);
     HttpService.login(data).then((d) => {
-      console.log(d);
+      kdLoader.toggleLoading(false);
       if (typeof(d.data.success) != 'undefined' && d.data.success == true) {
         $state.go('home');
       } else {
@@ -32,6 +34,5 @@ angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($sc
       }
     });
   }
-  
   
 });

@@ -12,6 +12,14 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
         e.stopPropagation();
       });
       
+      element.on('click', function(e) {
+        $('input[type=file]', $(this)).click()
+      });
+      
+      $('input:file').on('click', function(e) {
+        e.stopPropagation()
+      })
+      
       element.on('dragover dragenter', function(e) {
         element.addClass('is-dragover')
       });

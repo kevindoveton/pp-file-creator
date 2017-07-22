@@ -5,7 +5,7 @@ function toggleHeaderFooter(state: boolean, $scope: any) {
 }
 
 /* Controllers */
-angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function ($scope, $rootScope, $http, $templateCache, $state, localStorageService) {
+angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function ($scope, $rootScope, $http, $templateCache, $state, localStorageService, kdLoader) {
 
   $scope.showMenu = false;
 
@@ -16,10 +16,10 @@ angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function (
       // show this normally
       toggleHeaderFooter(true, $scope);
     }
-    $scope.loading = true;
+    kdLoader.toggleLoading(true);
   })
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
-    $scope.loading = false;
+    kdLoader.toggleLoading(false);
   });
   
   $scope.toggleMenu = function(show) {
