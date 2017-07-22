@@ -42,7 +42,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
         method: 'GET',
         url: url,
         headers: {
-          // 'x-token': localStorageService.get('accessToken')
+          'x-token': localStorageService.get('accessToken')
         }
     }).then(function (data) {
       deferred.resolve(data);
@@ -62,7 +62,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
           method: 'GET',
           url: url,
           headers: {
-            // 'x-token': localStorageService.get('accessToken')
+            'x-token': localStorageService.get('accessToken')
           }
       }).then(function (data) {
         if (DEBUG) console.log(data);
@@ -82,7 +82,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       method: 'DELETE',
       url: url, 
       headers: {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
+        'x-token': localStorageService.get('accessToken')
       },				
     }).then(function(data) {
       deferred.resolve(data);
@@ -106,7 +107,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       data: data,
       headers: {
         'Content-Type': 'application/json',
-        // 'x-token': localStorageService.get('accessToken')
+        'x-token': localStorageService.get('accessToken')
       },				
     }).then(function(data) {
       deferred.resolve(data);
@@ -148,18 +149,13 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
     },
     
     GetVerse: function(data: any, d) {
-      let baseUrl = 'https://familycentre.org.au/cfcapp/search/?json=true';
-      let ver = '&v='+data['ver'];
-      let ref = '&ref='+encodeURI(data['ref']);
+      let ver = 'v='+data['ver'];
+      let ref = 'ref='+encodeURI(data['ref']);
       
-      return getUrlAndCache(baseUrl + ver + ref);
+      return getUrlAndCache(BASE_URL+'/bible?' + ver + '&' + ref);
     },
 
 
-    // ------------------------
-    // login
-    // TODO: implement this server side
-    // ------------------------
     login: function(data) {
       return postJson(BASE_URL+'/auth', data, function(d) {
         if (d.data.success == true) {
@@ -168,6 +164,10 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
           localStorageService.set('accessToken', d.data.token)
         }
       });
+    },
+    
+    logout: function() {
+      return deleteUrl(BASE_URL+'/auth');
     }
     
     // LoginFacebook: function() {

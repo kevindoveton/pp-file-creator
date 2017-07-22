@@ -40,15 +40,15 @@ div.container
           label.active Translation
 
       //- image picker - used for image slide
-      div(ng-show="slide.type == 'IMAGE_SLIDE'")
+      div(ng-if="slide.type == 'IMAGE_SLIDE'")
         input(type="file" name="file" kd-file-upload kd-file-response="slide")
 
       //- editor - show for all but image slide
-      div.editor(ng-show="slide.type == 'TEXT_SLIDE'")
+      div.editor(ng-if="slide.type == 'TEXT_SLIDE'")
         div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide." options="{slide: slide}")
 
 
-    .col-md-3.hidden-sm-down.preview-container(ng-show="slide.type !== 'BIBLE_SLIDE'")
+    .col-md-3.hidden-sm-down.preview-container(ng-if="slide.type !== 'BIBLE_SLIDE'")
       div.preview(ng-style="sermon.template.preview.container")
         .box(ng-style="sermon.template.preview.box")
           .inner.box(ng-style="sermon.template.preview.innerbox")

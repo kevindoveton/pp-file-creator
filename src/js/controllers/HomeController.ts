@@ -240,15 +240,21 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
         height: $('.preview-container').height()
       }
       
+      console.log(container);
+      
       let preview = {
         width: $('.preview').width(),
         height: $('.preview').height()
       }
       
-      let scaleX = container.width / preview.width;
-      let scaleY = container.height / preview.height;
-      let scale = (scaleX > scaleY) ? scaleY : scaleX;
+      console.log(preview);
       
+      let scaleX = container.width / preview.width;
+      console.log(scaleX);
+      let scaleY = container.height / preview.height;
+      console.log(scaleY);
+      let scale = (scaleX > scaleY) ? scaleY : scaleX;
+      console.log(scale);
       $('.preview').css({zoom: scale});
     });
     

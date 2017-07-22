@@ -22,8 +22,14 @@ angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function (
     $scope.loading = false;
   });
   
-  $scope.toggleMenu = function() {
-    $scope.showMenu = !$scope.showMenu;
+  $scope.toggleMenu = function(show) {
+    if (typeof(show) != 'undefined') {
+      $scope.showMenu = show;
+    } else {
+      $scope.showMenu = !$scope.showMenu;
+    }
+    
+    return $scope.showMenu;
   }
   
 });

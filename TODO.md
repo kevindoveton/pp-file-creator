@@ -2,5 +2,4 @@
 | Filename | line # | TODO
 |:------|:------:|:------
 | src/js/controllers/LoginController.ts | 25 | check the data is good
-| src/js/factories/HttpService.ts | 161 | implement this server side
-| src/js/factories/HttpService.ts | 166 | user storage.. find a better way of reauthorising
+| src/js/factories/HttpService.ts | 162 | user storage.. find a better way of reauthorising

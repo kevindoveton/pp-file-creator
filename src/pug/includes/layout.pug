@@ -11,14 +11,15 @@ html(ng-app="ppfilecreator")
 
 
   body(ng-controller='AppCtrl')
-    div.title(ng-show="showHeader")
-      div.bg-primary.no-print
-        h2= AppName
-        div.hamburger.hamburger--minus(ng-click="toggleMenu()" ng-class="{'is-active': showMenu}")
-          span.hamburger-box
-            span.hamburger-inner
+    header(ng-show="showHeader")
+      div.title
+        div.bg-primary.no-print
+          h2= AppName
+          div.hamburger.hamburger--minus(ng-click="toggleMenu()" ng-class="{'is-active': showMenu}")
+            span.hamburger-box
+              span.hamburger-inner
 
-    span.bg-primary-light.no-print.layer.title
+      span.bg-primary-light.no-print.layer.title
     div.bodyContent.bg-primary-dark
       block body
     
