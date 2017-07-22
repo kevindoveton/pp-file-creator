@@ -107,16 +107,16 @@ gulp.task('sass', function(cb) {
       includePaths: [paths.sass],
       outputStyle: 'compressed'
     }),
-    // prefix(
-    //   [
-    //     'last 15 versions',
-    //     '> 1%',
-    //     'ie 8',
-    //     'ie 7'
-    //   ], {
-    //     cascade: true
-    //   }
-    // ),
+    prefix(
+      [
+        'last 15 versions',
+        '> 1%',
+        'ie 8',
+        'ie 7'
+      ], {
+        cascade: true
+      }
+    ),
     sourcemaps.write('maps'),
     browserSync.reload({
       stream: true
