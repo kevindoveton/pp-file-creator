@@ -71,9 +71,15 @@
 .medium-editor-placeholder:after
   color: #357ebd
 
+.medium-editor-element
+  &:focus
+    outline: none
 
 .editor
-  color: white
+  color: $secondary-text-color
+  background-color: white
+  padding: .5em
+  
   ul
     list-style: disc
     margin-left: 1.5em

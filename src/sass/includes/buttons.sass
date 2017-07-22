@@ -1,4 +1,4 @@
-button
+.btn
   display: block
   background-color: $accent-color
   color: $accent-color-text
@@ -13,15 +13,15 @@ button
   cursor: pointer
   outline: none
   transition: .5s all
-button:hover
-  background-color: darken($accent-color, 15)
+  &:hover
+    background-color: darken($accent-color, 15)
 
 .inline
   display: inline-block
   margin: 1em
 
 div.inlineButtonContainer
-  button
+  .btn
     display: inline-block
     background-color: $primary-color-text
     color: $primary-text-color

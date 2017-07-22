@@ -2,6 +2,7 @@
 angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $http, $q, localStorageService, $state) {
   
   const DEBUG = true;
+  if (DEBUG) console.warn('HTTP DEBUG SET')
   const BASE_URL = '__API-URL__/api/v1/';
   
   if (!CacheFactory.get('dataCache')) {3

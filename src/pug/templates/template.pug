@@ -14,13 +14,13 @@ div.container
         h2 {{t.title}}
         p {{t.preview.container.width}} x {{t.preview.container.height}}
     .col-md-3
-      button(ng-click="remove(t)") Remove
+      button.btn(ng-click="remove(t)") Remove
   
   .row
     .col-xs-12(style="background-color: #333; width: 100%; color: white;")
-      input(type="file" nv-file-select uploader="uploader")
+      input.text-input(type="file" nv-file-select uploader="uploader")
       ul
         li(ng-repeat="item in uploader.queue")
           span(ng-bind="item.file.name")
-          button(style="box-shadow: none" ng-click="item.upload()") Upload
+          button.btn(style="box-shadow: none" ng-click="item.upload()") Upload
       

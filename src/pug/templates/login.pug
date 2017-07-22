@@ -1,17 +1,18 @@
 div.login
   h2 EasyPro
   
-  button.facebook(ng-click="user.facebook()") Login with Facebook
+  button.facebook.btn(ng-click="user.facebook()") Login with Facebook
   
   div.login-box
     h1 Login
-    .inputField
-      input(type="text" ng-model="user.username")
-      label(ng-class="{active: user.username}") Username
-      span.input-decorator(ng-class="{expand: user.username}")
-    .inputField
-      input(type="password" ng-model="user.password")
-      label(ng-class="{active: user.password}") Password
-      span.input-decorator(ng-class="{expand: user.password}")
-    .inputField
-      button(ng-click="user.submit(user)") Submit
+    form(ng-submit="user.submit(user)")
+      .inputField
+        input.text-input(type="text" ng-model="user.username")
+        label(ng-class="{active: user.username}") Username
+        span.input-decorator(ng-class="{expand: user.username}")
+      .inputField
+        input.text-input(type="password" ng-model="user.password")
+        label(ng-class="{active: user.password}") Password
+        span.input-decorator(ng-class="{expand: user.password}")
+      .inputField
+        input.btn(type="submit" value="Submit")

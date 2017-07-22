@@ -4,17 +4,17 @@
 div.container
   .row
     .col-xs-12
-      div.header
+      div.header(draggable="true")
         h1 Your Presentations
     
   .row
     .col-sm-6
       .inputField.black
-        input(type="text" ng-model="sermon.title")
+        input.text-input(type="text" ng-model="sermon.title")
         label.active Title
     .col-sm-6
       .inputField.black
-        input(type="date" ng-model="sermon.date")
+        input.text-input(type="date" ng-model="sermon.date")
         label.active Date
     .col-sm-6
       .inputField
@@ -24,14 +24,14 @@ div.container
 
   .row(ng-show="sermon.slides.length == 0")
     .col-xs-12.submit
-      button(ng-click="addSlide()") Create your first slide!
+      button.btn(ng-click="addSlide()") Create your first slide!
 
   .row(ng-repeat="slide in sermon.slides").bg-primary-light.slide
     .col-md-8
       //- bible verse picker - used for bible slides
       div(ng-show="slide.type == 'BIBLE_SLIDE'")
         .inputField.half.black
-          input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide, $index)")
+          input.text-input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide, $index)")
           label.active Verse
         .inputField.half.black
           select(ng-model="slide.ver" ng-blur="getVerse(slide, $index)")
@@ -41,7 +41,10 @@ div.container
 
       //- image picker - used for image slide
       div(ng-if="slide.type == 'IMAGE_SLIDE'")
-        input(type="file" name="file" kd-file-upload kd-file-response="slide")
+        form.upload-file.flex.flex-center(kd-dnd kd-dnd-response="slide")
+          include ../includes/common/icon.svg.pug
+          p.upload-file__text Choose a file or drag and drop
+          input.upload-file__input(type="file" name="file" kd-file-upload kd-file-response="slide")
 
       //- editor - show for all but image slide
       div.editor(ng-if="slide.type == 'TEXT_SLIDE'")
@@ -49,14 +52,17 @@ div.container
 
 
     .col-md-3.hidden-sm-down.preview-container(ng-if="slide.type !== 'BIBLE_SLIDE'")
-      div.preview(ng-style="sermon.template.preview.container")
+      div.preview(ng-style="sermon.template.preview.container" ng-if="slide.type != 'IMAGE_SLIDE'")
         .box(ng-style="sermon.template.preview.box")
           .inner.box(ng-style="sermon.template.preview.innerbox")
             .content(ng-bind-html="slide.htmlContent")
+      div.preview(ng-style="sermon.template.preview.container" ng-if="slide.type == 'IMAGE_SLIDE'")
+        div.image-slide(ng-bind-html="slide.htmlContent | trusted")
+        
     .col-md-1
-      button(style="width: 100%;" ng-click="addSlide($index)") +
-      button(style="width: 100%;" ng-click="removeSlide($index)") -
+      button.btn(style="width: 100%;" ng-click="addSlide($index)") +
+      button.btn(style="width: 100%;" ng-click="removeSlide($index)") -
 
   .row
     .col-xs-12.submit(ng-show="sermon.slides.length > 0")
-      button(ng-click="submit()") Submit
+      button.btn(ng-click="submit()") Submit
