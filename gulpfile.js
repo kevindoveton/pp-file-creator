@@ -102,20 +102,22 @@ gulp.task('vendorjs', function(cb) {
 gulp.task('sass', function(cb) {
   pump([
     gulp.src(paths.sass + '*.sass'),
+    sourcemaps.init(),
     sass({
       includePaths: [paths.sass],
       outputStyle: 'compressed'
     }),
-    prefix(
-      [
-        'last 15 versions',
-        '> 1%',
-        'ie 8',
-        'ie 7'
-      ], {
-        cascade: true
-      }
-    ),
+    // prefix(
+    //   [
+    //     'last 15 versions',
+    //     '> 1%',
+    //     'ie 8',
+    //     'ie 7'
+    //   ], {
+    //     cascade: true
+    //   }
+    // ),
+    sourcemaps.write('maps'),
     browserSync.reload({
       stream: true
     }),
