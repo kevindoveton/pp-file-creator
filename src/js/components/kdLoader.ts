@@ -1,3 +1,13 @@
+/**
+ * loading spinner
+ * @example
+ * (in global layout)
+ * <kd-loader></kd-loader>
+ * (in controller, inject kdLoader)
+ * 1. kdLoader.toggleLoading(true) // shows loader
+ * 2. kdLoader.toggleLoading(false) // hides loader
+ * 3. kdLoader.toggleLoading // shows / hides loader - in this case shows
+*/
 angular.module('kdLoader', []).factory('kdLoader', ['$rootScope', function () {
   var spinner = undefined;
 

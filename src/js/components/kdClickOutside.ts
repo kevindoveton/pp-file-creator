@@ -1,5 +1,14 @@
 // adapted from
 // https://stackoverflow.com/a/29662137/4616652
+
+/**
+ * bind an event to a click outside of main div - such as closing modal
+ * @example
+ * will close if overlay is clicked
+ * .overlay
+ *   .modal(kd-click-outside="close()")
+ *      p content
+*/
 angular.module('kdClickOutside', []).directive('kdClickOutside', function ($document) {
   return {
     restrict: 'A',
