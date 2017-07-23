@@ -7,6 +7,7 @@ angular.module('ppfilecreator', [
   'ppfilecreator.services',
   'ppfilecreator.directives',
   'kdLoader',
+  'kdClickOutside',
   'ngAnimate',
   'ngSanitize',
   'angularModalService',
