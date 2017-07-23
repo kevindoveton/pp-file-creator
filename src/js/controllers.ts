@@ -6,14 +6,19 @@ function toggleHeaderFooter(state: boolean, $scope: any) {
 
 /* Controllers */
 angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function ($scope, $rootScope, $http, $templateCache, $state, localStorageService, kdLoader) {
-
+  var isLoggedIn = function() {
+    return !!localStorageService.get('accessToken');
+  }
   $scope.showMenu = false;
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    console.log(isLoggedIn())
     if (toState.name == 'login') {
       toggleHeaderFooter(false, $scope);
     } else {
-      // show this normally
+      if (!isLoggedIn()) {
+        $state.go('login');
+      }
       toggleHeaderFooter(true, $scope);
     }
     kdLoader.toggleLoading(true);

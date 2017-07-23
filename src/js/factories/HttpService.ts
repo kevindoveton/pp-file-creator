@@ -70,7 +70,11 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
         dataCache.put(url, data);
         deferred.resolve(data);
       }, function(error) {
-        if (error.status == 401 && $state.current.name != 'login') { $state.go('login'); return; }
+        if (error.status == 401 && $state.current.name != 'login') { 
+          localStorageService.remove('accessToken');
+          $state.go('login'); 
+          return; 
+        }
       });
     }
     return deferred.promise;
@@ -90,7 +94,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       deferred.resolve(data);
     }, function(error) {
       deferred.resolve(error);
-      if (error.status == 401 && $state.current.name != 'login') { 
+      if (error.status == 401 && $state.current.name != 'login') {
+        localStorageService.remove('accessToken');
         $state.go('login'); 
         return; 
       }
@@ -119,7 +124,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       }
     }, function(error) {
       deferred.resolve(error);
-      if (error.status == 401 && $state.current.name != 'login') { 
+      if (error.status == 401 && $state.current.name != 'login') {
+        localStorageService.remove('accessToken');
         $state.go('login'); 
         return; 
       }

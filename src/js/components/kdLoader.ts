@@ -12,7 +12,7 @@ angular.module('kdLoader', []).factory('kdLoader', ['$rootScope', function () {
       }
     }
   }
-  
+
 }]).directive('kdLoader', function() {
   return {
     template: [
