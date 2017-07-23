@@ -37,7 +37,7 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
         });
       })
     },
-    controller: function($scope, $http, $q) {
+    controller: function($scope, $http, $q, localStorageService) {
       $scope.uploadFile = function(file, url) {
         return $q(function(resolve, reject) {
           var fd = new FormData();
@@ -45,7 +45,8 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
           $http.post(url, fd, {
               transformRequest: angular.identity,
               headers: {
-                'Content-Type': undefined
+                'Content-Type': undefined,
+                'x-token': localStorageService.get('accessToken')
               }
           })
           .then(function(res){
@@ -74,7 +75,7 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
         });
       });
     },
-    controller: function($scope, $http, $q) {
+    controller: function($scope, $http, $q, localStorageService) {
 
       $scope.uploadFile = function(file, url) {
         return $q(function(resolve, reject) {
@@ -83,7 +84,8 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
           $http.post(url, fd, {
               transformRequest: angular.identity,
               headers: {
-                'Content-Type': undefined
+                'Content-Type': undefined,
+                'x-token': localStorageService.get('accessToken')
               }
           })
           .then(function(res){
