@@ -1,12 +1,12 @@
 - var AppName = 'EasyPro'
-
+- function random() { return (Math.random()*10000000000000000).toString(16); }
 html(ng-app="ppfilecreator")
   head
     meta(charset='utf8')
     meta(name="viewport" content="width=device-width, initial-scale=1")
     base(href='/')
     title= AppName
-    link(rel="stylesheet" type="text/css" href="/css/styles.css")
+    link(rel="stylesheet" type="text/css" href='/css/styles.css?'+random())
     link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700")
 
 
@@ -23,5 +23,5 @@ html(ng-app="ppfilecreator")
     div.bodyContent.bg-primary-dark
       block body
     
-    script(src='/js/vendor.js')
-    script(src='/js/dist.js')
+    script(src='/js/vendor.js?'+random())
+    script(src='/js/dist.js?'+random())
