@@ -173,6 +173,10 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       });
     },
     
+    CreateUser: function(data) {
+      return postJson(BASE_URL+'/users', data);
+    },
+    
     logout: function() {
       return deleteUrl(BASE_URL+'/auth');
     }

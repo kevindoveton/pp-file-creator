@@ -6,6 +6,7 @@ angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($sc
     facebook: facebookLogin
   }
   
+  $scope.newUser = newUser;
   
   /**
    * login using facebook
@@ -33,6 +34,41 @@ angular.module('ppfilecreator.controllers').controller('LoginCtrl', function($sc
         alert(d.data.message);
       }
     });
+  }
+  
+  function newUser() {
+      ModalService.showModal({
+        templateUrl: "/modals/newUser.html",
+        controller: "NewUserModalCtrl"
+      }).then(function(modal) {
+        modal.close.then(function(result) {
+          
+        });
+      });
+  }
+  
+});
+
+
+angular.module('ppfilecreator.controllers').controller('NewUserModalCtrl', function($scope, $state, close, HttpService) {
+  $scope.close = close;
+  
+  $scope.user = {
+    username: '',
+    password: ''
+  }
+  
+  $scope.submit = function() {
+    HttpService.CreateUser({
+      username: $scope.user.username,
+      password: $scope.user.password
+    }).then(function(success) {
+      if (success.status == 201) {
+        close();
+      } else {
+        alert('error')
+      }
+    })
   }
   
 });
