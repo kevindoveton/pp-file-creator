@@ -69,9 +69,9 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
     link: function ($scope, element, attrs) {
       element.on('change', function(evt: any) {
         var file = evt.target.files[0]
+        $scope.kdFileResponse.htmlContent = $('<div class="image-slide"></div>').css({'background-image': 'url("'+URL.createObjectURL(file)+'")'}).prop('outerHTML');
         $scope.uploadFile(file, '__API-URL__/api/v1/s3').then(function(res) {
           $scope.kdFileResponse.image = res.data;
-          $scope.kdFileResponse.htmlContent = $('<div class="image-slide"></div>').css({'background-image': 'url("'+URL.createObjectURL(file)+'")'}).prop('outerHTML');
         });
       });
     },
