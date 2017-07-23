@@ -3,11 +3,11 @@
 
 angular.module('ppfilecreator', [
   'ppfilecreator.controllers',
-  'ppfilecreator.filters',
   'ppfilecreator.services',
   'ppfilecreator.directives',
   'kdLoader',
   'kdClickOutside',
+  'kdFilterTrust',
   'ngAnimate',
   'ngSanitize',
   'angularModalService',

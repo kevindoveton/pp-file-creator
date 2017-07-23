@@ -1,3 +1,4 @@
+// adapted from
 // https://stackoverflow.com/a/29662137/4616652
 angular.module('kdClickOutside', []).directive('kdClickOutside', function ($document) {
   return {
@@ -16,7 +17,6 @@ angular.module('kdClickOutside', []).directive('kdClickOutside', function ($docu
       });
       
       function kdClickOutsideFunc(e) {
-        console.log('click');
         if (el !== e.target && !el[0].contains(e.target)) {
           scope.$apply(function () {
             scope.$eval(scope.kdClickOutside);
