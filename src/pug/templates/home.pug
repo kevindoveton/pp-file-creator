@@ -5,7 +5,7 @@ div.container
   .row
     .col-xs-12
       div.header(draggable="true")
-        h1 Your Presentations
+        h1 Presentations
     
   .row
     .col-sm-6
@@ -26,15 +26,15 @@ div.container
     .col-xs-12.submit
       button.btn(ng-click="addSlide()") Create your first slide!
 
-  .row(ng-repeat="slide in sermon.slides").bg-primary-light.slide
+  .row(ng-repeat="slide in sermon.slides").bg-primary.slide
     .col-md-8
       //- bible verse picker - used for bible slides
       div(ng-show="slide.type == 'BIBLE_SLIDE'")
         .inputField.half.black
-          input.text-input(type="text" ng-model="slide.fullRef" ng-blur="getVerse(slide, $index)")
+          input.text-input(type="text" ng-model="slide.fullRef")
           label.active Verse
         .inputField.half.black
-          select(ng-model="slide.ver" ng-blur="getVerse(slide, $index)")
+          select(ng-model="slide.ver")
             each translation in SupportedTranslations
               option= translation
           label.active Translation
@@ -42,22 +42,27 @@ div.container
       //- image picker - used for image slide
       div(ng-if="slide.type == 'IMAGE_SLIDE'")
         form.upload-file.flex.flex-center(kd-dnd kd-dnd-response="slide")
-          include ../includes/common/icon.svg.pug
-          p.upload-file__text Choose a file or drag and drop
+          div.upload-file--hide-uploading
+            include ../includes/common/icon.svg.pug
+          p.upload-file__text.upload-file--hide-uploading Choose a file or drag and drop
           input.upload-file__input(type="file" name="file" kd-file-upload kd-file-response="slide")
+          p.upload-file__text.upload-file--show-uploading Uploading...
 
       //- editor - show for all but image slide
       div.editor(ng-if="slide.type == 'TEXT_SLIDE'")
         div(ng-model="slide.htmlContent" medium-editor bind-options="toolbar" data-placeholder="Create your slide." options="{slide: slide}")
 
 
-    .col-md-3.hidden-sm-down.preview-container(ng-if="slide.type !== 'BIBLE_SLIDE'")
-      div.preview(ng-style="sermon.template.preview.container" ng-if="slide.type != 'IMAGE_SLIDE'")
+    .col-md-3.hidden-sm-down.preview-container(ng-if="slide.type != 'BIBLE_SLIDE'")
+      div.preview(ng-style="sermon.template.preview.container" ng-if="slide.type == 'TEXT_SLIDE'")
         .box(ng-style="sermon.template.preview.box")
           .inner.box(ng-style="sermon.template.preview.innerbox")
             .content(ng-bind-html="slide.htmlContent")
       div.preview(ng-style="sermon.template.preview.container" ng-if="slide.type == 'IMAGE_SLIDE'")
         div.image-slide(ng-bind-html="slide.htmlContent | trusted")
+    .col-md-3(ng-if="slide.type == 'BIBLE_SLIDE'")
+      div.search(ng-if="slide.type == 'BIBLE_SLIDE'")
+        button.btn(ng-click="getVerse(slide, $index)") Search
         
     .col-md-1
       button.btn(style="width: 100%;" ng-click="addSlide($index)") +

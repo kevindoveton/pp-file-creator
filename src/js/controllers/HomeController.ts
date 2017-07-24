@@ -22,7 +22,7 @@ if (DISABLE_LOCAL_STORAGE) {
   console.warn('DISABLE_LOCAL_STORAGE SET')
 }
 
-angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService) {
+angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService, kdLoader) {
   
   $scope.sermon = {
     title: '',
@@ -90,6 +90,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
   }
 
   $scope.getVerse = function(slide, index) {
+    kdLoader.toggleLoading(true);
     var ref = slide.fullRef;
     var ver = slide.ver;
     let bibleData = {
@@ -130,6 +131,11 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
         slide.htmlContent += d[i].text+'</p>';
         verse = d[i].verse;
       }
+      kdLoader.toggleLoading(false);
+    }, (fail) => {
+      console.warn(fail);
+      alert('verse not found');
+      kdLoader.toggleLoading(false);
     });
   }
 

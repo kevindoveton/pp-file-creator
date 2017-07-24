@@ -37,8 +37,9 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
         });
       })
     },
-    controller: function($scope, $http, $q, localStorageService) {
+    controller: function($scope, $http, $q, $element, localStorageService) {
       $scope.uploadFile = function(file, url) {
+        $element.addClass('upload-file--uploading')
         return $q(function(resolve, reject) {
           var fd = new FormData();
           fd.append('file', file);
@@ -50,9 +51,11 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
               }
           })
           .then(function(res){
+            $element.removeClass('upload-file--uploading')
             resolve(res);
           })
           .catch(function(err){
+            $element.removeClass('upload-file--uploading')
             reject(err);
           });
         })
@@ -75,10 +78,11 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
         });
       });
     },
-    controller: function($scope, $http, $q, localStorageService) {
+    controller: function($scope, $http, $q, $element, localStorageService) {
 
       $scope.uploadFile = function(file, url) {
         return $q(function(resolve, reject) {
+          $element.addClass('upload-file--uploading')
           var fd = new FormData();
           fd.append('file', file);
           $http.post(url, fd, {
@@ -89,9 +93,11 @@ angular.module('ppfilecreator.directives', []).directive('kdDnd', function() {
               }
           })
           .then(function(res){
+            $element.removeClass('upload-file--uploading')
             resolve(res);
           })
           .catch(function(err){
+            $element.removeClass('upload-file--uploading')
             reject(err);
           });
         })

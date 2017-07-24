@@ -3,16 +3,16 @@ div.container
     .col-xs-12
       h1 Files
   
-  .row(ng-repeat="presentation in presentations")
+  .row(ng-repeat="presentation in presentations").bg-primary.slide
+    .col-md-6
+      div
+        h3 {{presentation.title}}
+        p {{presentation.date}}
     .col-md-3
       div.preview(ng-style="presentation.template.preview.container")
         .box(ng-style="presentation.template.preview.box")
           .inner.box(ng-style="presentation.template.preview.innerbox")
             .content(ng-bind-html="presentation.slides[0].htmlContent")
-    .col-md-6
-      div
-        h2 {{presentation.title}}
-        p {{presentation.date}}
     .col-md-3
         a(ng-click="download(presentation._id)")
           button.btn() Download

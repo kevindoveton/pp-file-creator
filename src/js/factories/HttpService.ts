@@ -73,8 +73,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
         if (error.status == 401 && $state.current.name != 'login') { 
           localStorageService.remove('accessToken');
           $state.go('login'); 
-          return; 
         }
+        deferred.reject(error);
       });
     }
     return deferred.promise;
@@ -97,8 +97,8 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       if (error.status == 401 && $state.current.name != 'login') {
         localStorageService.remove('accessToken');
         $state.go('login'); 
-        return; 
       }
+      deferred.reject(error);
     });
     
     return deferred.promise;
@@ -127,7 +127,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       if (error.status == 401 && $state.current.name != 'login') {
         localStorageService.remove('accessToken');
         $state.go('login'); 
-        return; 
+        deferred.reject(error);
       }
     });
     
