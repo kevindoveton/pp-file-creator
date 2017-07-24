@@ -3,7 +3,7 @@ div.container
     .col-xs-12
       h1 Templates
   
-  .row(ng-repeat="t in templates")
+  .row(ng-repeat="t in templates").slide.bg-primary
     .col-md-3
       div.preview(ng-style="t.preview.container")
         .box(ng-style="t.preview.box")
@@ -11,7 +11,7 @@ div.container
             .content(ng-bind-html="t.htmlContent")
     .col-md-6
       div
-        h2 {{t.title}}
+        h2.less-blur {{t.title}}
         p {{t.preview.container.width}} x {{t.preview.container.height}}
     .col-md-3
       button.btn(ng-click="remove(t)") Remove
