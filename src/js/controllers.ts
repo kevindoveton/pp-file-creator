@@ -6,6 +6,7 @@ function toggleHeaderFooter(state: boolean, $scope: any) {
 
 /* Controllers */
 angular.module('ppfilecreator.controllers', []).controller('AppCtrl', function ($scope, $rootScope, $http, $templateCache, $state, localStorageService, kdLoader) {
+  $scope.appLoaded = true;
   var isLoggedIn = function() {
     return !!localStorageService.get('accessToken');
   }

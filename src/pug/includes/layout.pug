@@ -10,18 +10,20 @@ html(ng-app="ppfilecreator")
     link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700")
 
 
-  body(ng-controller='AppCtrl')
-    header(ng-show="showHeader")
-      div.title
-        div.bg-primary.no-print
-          h2= AppName
-          div.hamburger.hamburger--minus(ng-click="toggleMenu()" ng-class="{'is-active': showMenu}")
-            span.hamburger-box
-              span.hamburger-inner
+  body(ng-controller='AppCtrl' )
+    include ../modals/loader
+    div.angular-container(ng-cloak)
+      header(ng-show="showHeader")
+        div.title
+          div.bg-primary.no-print
+            h2= AppName
+            div.hamburger.hamburger--minus(ng-click="toggleMenu()" ng-class="{'is-active': showMenu}")
+              span.hamburger-box
+                span.hamburger-inner
 
-      span.bg-primary-light.no-print.layer.title
-    div.bodyContent.bg-primary-dark-gradient
-      block body
-    
+        span.bg-primary-light.no-print.layer.title
+      div.bodyContent.bg-primary-dark-gradient
+        block body
+      
     script(src='/js/vendor.js?'+random())
     script(src='/js/dist.js?'+random())
