@@ -4,7 +4,7 @@ div.container
       h1 Templates
   
   .row(ng-repeat="t in templates").slide.bg-primary
-    .col-md-3
+    .col-md-3.preview-container
       div.preview(ng-style="t.preview.container")
         .box(ng-style="t.preview.box")
           .inner.box(ng-style="t.preview.innerbox")
@@ -14,7 +14,7 @@ div.container
         h2.less-blur {{t.title}}
         p {{t.preview.container.width}} x {{t.preview.container.height}}
     .col-md-3
-      button.btn(ng-click="remove(t)") Remove
+      kd-dialog(style="width: 100%;" kd-dialog-click="remove(t)" kd-dialog-button="Remove")
   
   .row
     .col-xs-12(style="background-color: #333; width: 100%; color: white;")

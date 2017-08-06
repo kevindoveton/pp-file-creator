@@ -24,10 +24,11 @@ if (DISABLE_LOCAL_STORAGE) {
 
 angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($scope, $window, $state, ModalService, HttpService, FileSaver, Blob, localStorageService, kdLoader) {
   
+  // default - may be overriden by local storage
   $scope.sermon = {
     title: '',
     date: new Date(),
-    slides: [IMAGE_SLIDE()],
+    slides: [TEXT_SLIDE()],
     template: undefined,
     firstRun: true
   }
@@ -75,7 +76,10 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     }
   }
 
-
+  /**
+   * submit the presentation
+   * @returns {state} - go to file state
+  */
   $scope.submit = function() {
     $scope.sermon.slides = $scope.sermon.slides;
     HttpService.CreateNewDocument($scope.sermon).then(function(d) {
@@ -89,6 +93,9 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     });
   }
 
+  /**
+   * get a bible verse from the api
+  */
   $scope.getVerse = function(slide, index) {
     kdLoader.toggleLoading(true);
     var ref = slide.fullRef;
@@ -139,6 +146,10 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     });
   }
 
+  /**
+   * remove a specific slide from a presentation
+   * @param position {Number} - the position to remove
+  */
   $scope.removeSlide = function(position:number) {
     // if the slide has children, remove them first
     if (typeof($scope.sermon.slides[position].children) !== 'undefined') {
@@ -154,9 +165,12 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
     // remove the slide
     $scope.sermon.slides = removeFromArray($scope.sermon.slides, position)
   }
-
+  
+  /**
+   * add a specific slide to a presentation
+   * @param position {Number} - the position to add
+  */
   $scope.addSlide = function(position) {
-    console.log($scope.sermon.slides[0]);
     ModalService.showModal({
       templateUrl: "/modals/newSlide.html",
       controller: "NewSlideModalCtrl"
@@ -254,7 +268,7 @@ angular.module('ppfilecreator.controllers').controller('HomeCtrl', function($sco
       let scaleX = container.width / preview.width;
       let scaleY = container.height / preview.height;
       let scale = (scaleX > scaleY) ? scaleY : scaleX;
-      $('.preview').css({zoom: scale});
+      $('.preview').css({transform: 'scale('+scale+')'});
     });
     
     $(window).trigger('resize');
@@ -293,7 +307,9 @@ function removeFromArray(arr:Array<object>, position:number) {
   return arr;
 }
 
-
+/**
+ * new slide controller
+*/
 angular.module('ppfilecreator.controllers').controller('NewSlideModalCtrl', function($scope, $state, close) {
   $scope.close = close;
   

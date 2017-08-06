@@ -17,9 +17,17 @@
   &:hover
     background-color: darken($accent-color, 15)
 
-.inline
+.btn--inline
   display: inline-block
   margin: 1em
+
+.btn--positive
+  background-color: $accent-color
+
+.btn--negative
+  background-color: $negative-color
+  &:hover
+    background-color: darken($negative-color, 10)
 
 div.inlineButtonContainer
   .btn

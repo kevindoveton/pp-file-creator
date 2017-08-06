@@ -66,8 +66,8 @@ div.container
         
     .col-md-1
       button.btn(style="width: 100%;" ng-click="addSlide($index)") +
-      button.btn(style="width: 100%;" ng-click="removeSlide($index)") -
+      kd-dialog(style="width: 100%;" kd-dialog-click="removeSlide($index)" kd-dialog-button="-" kd-dialog-button-styles="btn--negative")
 
   .row
     .col-xs-12.submit(ng-show="sermon.slides.length > 0")
-      button.btn(ng-click="submit()") Submit
+      kd-dialog(kd-dialog-click="submit()" kd-dialog-button="Submit")

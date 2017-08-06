@@ -8,6 +8,7 @@ angular.module('ppfilecreator', [
   'kdLoader',
   'kdClickOutside',
   'kdFilterTrust',
+  'kdDialog',
   'ngAnimate',
   'ngSanitize',
   'angularModalService',
