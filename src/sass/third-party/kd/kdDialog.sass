@@ -4,9 +4,24 @@
 
   .kdd.dialog
     position: fixed
-    top: 0
-    left: 0
-    width: 100vw
-    height: 100vh
-    background: red
-    z-index: 10
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 80%
+    max-width: 720px
+    background-color: red
+    color: white
+    padding: 1em
+    margin: 0 auto
+    height: 50vh
+
+    .text
+      padding: 1em
+
+    .buttons 
+      display: flex
+      justify-content: center
+      align-items: center
+      
+      button.btn--decline
+        @extend .btn--negative
