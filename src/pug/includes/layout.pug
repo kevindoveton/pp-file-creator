@@ -16,7 +16,7 @@ html(ng-app="ppfilecreator")
       header(ng-show="showHeader")
         div.title
           div.bg-primary.no-print
-            h2= AppName
+            h2(ui-sref="home")= AppName
             div.hamburger.hamburger--minus(ng-click="toggleMenu()" ng-class="{'is-active': showMenu}")
               span.hamburger-box
                 span.hamburger-inner

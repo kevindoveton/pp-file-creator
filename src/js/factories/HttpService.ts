@@ -114,7 +114,7 @@ angular.module('ppfilecreator').factory('HttpService', function (CacheFactory, $
       headers: {
         'Content-Type': 'application/json',
         'x-token': localStorageService.get('accessToken')
-      },				
+      },
     }).then(function(data) {
       deferred.resolve(data);
       if (DEBUG) console.log(data);

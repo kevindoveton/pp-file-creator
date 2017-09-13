@@ -1,4 +1,4 @@
-angular.module('ppfilecreator.controllers').controller('TemplateCtrl', function($scope, ModalService, HttpService, FileUploader) {
+angular.module('ppfilecreator.controllers').controller('TemplateCtrl', function($scope, ModalService, HttpService, FileUploader, localStorageService) {
   $scope.templates = [];
   updateTemplates();
   
@@ -11,7 +11,7 @@ angular.module('ppfilecreator.controllers').controller('TemplateCtrl', function(
   
   // upload a template
   $scope.uploader = new FileUploader({
-    url: '__API-URL__'+'/api/v1/templates',
+    url: '__API-URL__'+'/api/v1/templates?token='+localStorageService.get('accessToken'),
     alias: 'template'
   });
   

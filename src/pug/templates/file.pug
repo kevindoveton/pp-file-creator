@@ -3,7 +3,7 @@ div.container
     .col-xs-12
       h1 Files
   
-  .row(ng-repeat="presentation in presentations").bg-primary.slide
+  .row(ng-repeat="presentation in presentations").bg-primary.slide.file
     .col-md-6
       div
         h3 {{presentation.title}}
@@ -16,3 +16,6 @@ div.container
     .col-md-3
         a(ng-click="download(presentation._id)")
           button.btn() Download
+
+    //- .col-xs-12.hover
+      button.btn Edit
